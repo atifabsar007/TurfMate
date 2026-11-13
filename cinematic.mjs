@@ -187,8 +187,8 @@
   const ball=new THREE.Mesh(new THREE.SphereGeometry(1.08,48,32),new THREE.MeshPhysicalMaterial({map:makeBallTexture(),roughness:.43,clearcoat:.32}));
   ball.castShadow=true;scene.add(ball);
   const ballPath=new THREE.CatmullRomCurve3([[-20,1.25,15],[-14,1.25,11],[-7,1.25,8],[1,1.25,5],[10,1.25,2],[18,1.45,-2],[26,2.4,-5],[34,4.6,-7],[42,7.2,-6],[49,6.2,-3],[53.5,3.4,-1],[57.5,1.9,0]].map(p=>new THREE.Vector3(...p)),false,'catmullrom',.42);
-  const entryCam=new THREE.CatmullRomCurve3([[0,158,68],[0,126,58],[0,91,48],[-3,55,34],[-10,4.8,21]].map(p=>new THREE.Vector3(...p)));
-  const entryLook=new THREE.CatmullRomCurve3([[0,0,0],[0,0,0],[0,0,0],[-2,1,3],[-2,1.25,12]].map(p=>new THREE.Vector3(...p)));
+  const entryCam=new THREE.CatmullRomCurve3([[0,158,68],[0,126,58],[-3,91,48],[-12,55,34],[-24.8,3.95,18.2]].map(p=>new THREE.Vector3(...p)));
+  const entryLook=new THREE.CatmullRomCurve3([[0,0,0],[0,0,0],[-1,0,0],[-8,1,6],[-13.8,1.55,10.8]].map(p=>new THREE.Vector3(...p)));
   const exitCam=new THREE.CatmullRomCurve3([[39,5,19],[64,18,48],[26,48,106],[0,106,164]].map(p=>new THREE.Vector3(...p)));
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t)};
   let progress=0,active=false,paused=false,chapter=-1,last=performance.now();
