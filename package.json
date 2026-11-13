@@ -1,11 +1,13 @@
 {
   "name": "turfmate-website",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "private": true,
-  "description": "TurfMate responsive football turf discovery and booking website prototype.",
+  "description": "TurfMate continuous cinematic 3D stadium and football discovery website.",
   "scripts": {
     "dev": "python3 -m http.server 4173",
-    "test": "node --check app.js && node tests/smoke-test.js"
+    "test": "node --check app.js && node --check cinematic.mjs && node tests/smoke-test.js"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
