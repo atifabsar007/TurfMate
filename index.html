@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10251d">
+  <meta name="description" content="Discover football turfs, compare demo availability and plan your next game with TurfMate.">
+  <title>TurfMate — Find your pitch. Book your game.</title>
+  <link rel="icon" type="image/svg+xml" href="assets/turfmate-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="notice"><span class="pulse"></span> TurfMate is getting the game ready <a href="#/partner">Own a turf? Partner with us ↗</a></div>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="#/" aria-label="TurfMate home"><img src="assets/turfmate-mark.svg" alt=""><span>turf<span class="brand-light">mate</span><i>.</i></span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#/explore" data-nav="explore">Explore</a><a href="#/bookings" data-nav="bookings">My bookings</a><a href="#/academy" data-nav="academy">Academy</a><a href="#/community" data-nav="community">Community</a><a href="#/tournaments" data-nav="tournaments">Tournaments</a>
+      </nav>
+      <div class="header-actions"><a class="owner-link" href="#/partner">List your turf</a><button class="btn btn-dark btn-sm" data-action="open-auth">Log in <span>↗</span></button><button class="menu-toggle" data-action="toggle-menu" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button></div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation"><a href="#/explore">Explore turfs</a><a href="#/bookings">My bookings</a><a href="#/academy">Academy</a><a href="#/community">Community</a><a href="#/tournaments">Tournaments</a><a href="#/partner">List your turf</a><button data-action="open-auth">Log in / Sign up</button></nav>
+  </header>
+  <main id="app" tabindex="-1" aria-live="polite"></main>
+  <footer class="footer"><div class="footer-grid"><div class="footer-brand"><a class="brand brand-footer" href="#/"><img src="assets/turfmate-mark.svg" alt=""><span>turf<span class="brand-light">mate</span><i>.</i></span></a><p>Less planning. More playing.<br>Your next game starts here.</p><div class="socials"><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">ig</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">f</a><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">in</a></div></div><div><h4>Discover</h4><a href="#/explore">Find a turf</a><a href="#/academy">TurfMate Academy</a><a href="#/community">Find players</a><a href="#/tournaments">Tournaments</a></div><div><h4>For partners</h4><a href="#/partner">List your venue</a><a href="#/partner">Partner benefits</a><a href="#/partner">Partner support</a></div><div><h4>Company</h4><a href="#/about">About TurfMate</a><a href="#/partner">Contact</a><a href="#/privacy">Privacy</a><a href="#/terms">Terms</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> TurfMate. Built for the love of the game.</span><span><b class="pulse"></b> Dhaka, Bangladesh <i>·</i> Prototype experience</span></div></footer>
+  <div class="modal-layer" id="modal-root" aria-hidden="true"></div><div class="toast-stack" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
