@@ -68,18 +68,18 @@
   renderer.setSize(innerWidth,innerHeight,false);
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.2;
+  renderer.toneMappingExposure=1.55;
   renderer.shadowMap.enabled=!mobile.matches;
 
   const scene=new THREE.Scene();
   scene.background=null;
   renderer.setClearColor(0x000000,0);
-  scene.fog=new THREE.FogExp2(0x06100a,.0023);
+  scene.fog=new THREE.FogExp2(0x173b24,.00125);
   const camera=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,.1,700);
   camera.position.set(0,112,160);
   const look=new THREE.Vector3();
-  scene.add(new THREE.HemisphereLight(0xb8d8c0,0x07140c,1.6),new THREE.AmbientLight(0xc4e4cc,.38));
-  const sun=new THREE.DirectionalLight(0xd8f0dd,1.8);
+  scene.add(new THREE.HemisphereLight(0xd8f4d8,0x173a20,2.15),new THREE.AmbientLight(0xd2f1d1,.72));
+  const sun=new THREE.DirectionalLight(0xf1ffe5,2.5);
   sun.position.set(-55,90,35);sun.castShadow=!mobile.matches;sun.shadow.mapSize.set(1024,1024);
   sun.shadow.camera.left=-100;sun.shadow.camera.right=100;sun.shadow.camera.top=100;sun.shadow.camera.bottom=-100;scene.add(sun);
 
@@ -98,9 +98,10 @@
     const p=[];for(let i=0;i<96;i++){const a=i/96*Math.PI*2;p.push([cx+Math.cos(a)*rad,.33,cz+Math.sin(a)*rad]);}line(p,true);
   }
 
-  const ground=new THREE.Mesh(new THREE.PlaneGeometry(520,520),mat(0x07110b,1));
+  const groundMaterial=new THREE.MeshStandardMaterial({color:0x2d6339,roughness:1,transparent:true,opacity:.34,depthWrite:false});
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(520,520),groundMaterial);
   ground.rotation.x=-Math.PI/2;ground.position.y=-1;scene.add(ground);
-  const turf=mat(0x176b37,.97),alt=mat(0x0d4927,.97);
+  const turf=mat(0x27964c,.92),alt=mat(0x19763a,.94);
   const field=new THREE.Mesh(new THREE.PlaneGeometry(105,68),turf);
   field.rotation.x=-Math.PI/2;field.position.y=.08;field.receiveShadow=true;scene.add(field);
   for(let i=0;i<10;i++){
@@ -111,7 +112,7 @@
   rect(-52.5,-20.16,-36,20.16);rect(36,-20.16,52.5,20.16);
   rect(-52.5,-9.16,-47,9.16);rect(47,-9.16,52.5,9.16);
 
-  const stand=mat(0x14231d,.92),concrete=mat(0x1a2921,.92),roof=mat(0x1b2922,.72,.45);
+  const stand=mat(0x294637,.88),concrete=mat(0x52675a,.9),roof=mat(0x455d4a,.72,.35);
   for(let r=0;r<19;r++){
     const y=3+r*.72,z=36.6+r*1.16,x=54.8+r*1.16,m=r%3?stand:concrete;
     box(116+r*.9,.82,1.2,m,0,y,z,true);box(116+r*.9,.82,1.2,m,0,y,-z,true);
@@ -139,7 +140,7 @@
     box(.55,13,.55,roof,i*27,12.5,54,true);box(.55,13,.55,roof,i*27,12.5,-54,true);
     box(.55,13,.55,roof,62,12.5,i*17,true);box(.55,13,.55,roof,-62,12.5,i*17,true);
   }
-  const led=new THREE.MeshStandardMaterial({color:0x8cff70,emissive:0x5dff6b,emissiveIntensity:2.1});
+  const led=new THREE.MeshStandardMaterial({color:0xbaff72,emissive:0x86ff76,emissiveIntensity:2.7});
   box(111,.35,.28,led,0,18.3,52.2);box(111,.35,.28,led,0,18.3,-52.2);
   box(.28,.35,70,led,59.4,18.3,0);box(.28,.35,70,led,-59.4,18.3,0);
 
@@ -165,7 +166,7 @@
     const x=sx*72,z=sz*63,pole=new THREE.Mesh(new THREE.CylinderGeometry(.32,.62,34,8),mat(0x263a30,.6,.5));
     pole.position.set(x,19,z);scene.add(pole);
     box(7,2.4,1.2,new THREE.MeshStandardMaterial({color:0xd8f5db,emissive:0xc6ffcf,emissiveIntensity:2.5}),x,36.5,z);
-    const light=new THREE.SpotLight(0xe5ffe8,820,190,Math.PI/4.2,.72,1.5);
+    const light=new THREE.SpotLight(0xf0ffe9,1250,205,Math.PI/4.2,.72,1.35);
     light.position.set(x,36,z);light.target.position.set(0,0,0);scene.add(light,light.target);
   }
   const cityMats=[0x101e17,0x14231c,0x0c1912,0x1b2a20].map(c=>mat(c,.98));
@@ -237,7 +238,7 @@
     else{const t=smooth((p-.87)/.13);pos=exitCam.getPointAt(t);target=new THREE.Vector3(0,0,0);}
     const targetFov=reduce.matches?52:(p<.22?58-12*smooth(p/.22):p<.87?46-3*smooth((q-.72)/.28):43+9*smooth((p-.87)/.13));
     camera.fov+=(targetFov-camera.fov)*.055;camera.updateProjectionMatrix();
-    camera.position.lerp(pos,reduce.matches ? .08 : .075);look.lerp(target,reduce.matches ? .08 : .085);camera.lookAt(look);camera.rotation.z=reduce.matches?0:Math.sin(q*Math.PI*2)*.009;canvas.style.opacity=String(reduce.matches?1:smooth((p-.015)/.12));renderer.render(scene,camera);
+    camera.position.lerp(pos,reduce.matches ? .08 : .075);look.lerp(target,reduce.matches ? .08 : .085);camera.lookAt(look);camera.rotation.z=reduce.matches?0:Math.sin(q*Math.PI*2)*.009;canvas.style.opacity=String(reduce.matches?1:.24+.76*smooth((p-.015)/.12));renderer.render(scene,camera);
   }
   requestAnimationFrame(animate);
   if(reduce.addEventListener)reduce.addEventListener('change',readScroll);
