@@ -1,5 +1,4 @@
 (async function startTurfMateCinema(){
-(async function startTurfMateCinema(){
   if(document.readyState==='loading')await new Promise(resolve=>document.addEventListener('DOMContentLoaded',resolve,{once:true}));
   const app=document.querySelector('#app');
   if(!app)return;
@@ -43,8 +42,6 @@
     }
     function draw(now){
       requestAnimationFrame(draw);if(!active||document.hidden)return;ctx.clearRect(0,0,w,h);
-      const img=p<.2?aerial:(p<.88?action:aerial);
-      if(img.complete&&img.naturalWidth){const z=p<.2?1+p*1.8:(p<.88?1+(p-.2)*1.05:1.35),scale=Math.max(w/img.width,h/img.height)*z,dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,(w-dw)/2-Math.sin(p*5)*w*.04,(h-dh)/2+p*h*.035,dw,dh);}
       const shade=ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'rgba(2,10,6,.28)');shade.addColorStop(.5,'rgba(2,10,6,.02)');shade.addColorStop(1,'rgba(2,10,6,.55)');ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
       const q=smooth((p-.15)/.82),x=w*(.5+Math.sin(q*Math.PI*3.2)*.3),y=h*(.62+Math.sin(q*Math.PI*6.4)*.11),radius=clamp(Math.min(w,h)*(.028+(1-q)*.018),17,54);
       if(p>.13&&p<.98){ctx.strokeStyle='rgba(198,255,131,.35)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-radius*2.7,y+radius*.8);ctx.quadraticCurveTo(x-radius*1.5,y+radius*1.6,x-radius*.8,y+radius*.3);ctx.stroke();drawBall(x,y,radius,paused||reduce.matches?0:q*16+now*.0008);}
