@@ -18,7 +18,6 @@
     const hud=document.createElement('div');hud.className='tm-cinema-hud';hud.hidden=true;hud.innerHTML='<span class="hud-index">01 / 08</span><span class="hud-scene">STADIUM APPROACH</span><span class="hud-track"><span></span></span><button type="button" aria-label="Pause ball motion">Ⅱ</button>';document.body.appendChild(hud);
     const idx=hud.querySelector('.hud-index'),label=hud.querySelector('.hud-scene'),bar=hud.querySelector('.hud-track span'),toggle=hud.querySelector('button');
     toggle.addEventListener('click',()=>{paused=!paused;toggle.textContent=paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',paused?'Resume ball motion':'Pause ball motion');});
-    const aerial=new Image(),action=new Image();aerial.src='assets/stadium-aerial.webp';action.src='assets/pitch-action.webp';
     function resize(){w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,mobile.matches?1.25:1.6);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
     function update(){
       const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);p=reduce.matches?0:clamp(scrollY/max,0,1);
