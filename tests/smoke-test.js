@@ -20,4 +20,10 @@ for (const file of ['assets/turfmate-mark.svg', 'styles.css', 'app.js']) {
 for (const route of ['/explore', '/saved', '/bookings', '/academy', '/community', '/tournaments', '/store', '/partner']) {
   assert.ok(js.includes(`'${route}'`) || js.includes(`"${route}"`), `Route missing: ${route}`);
 }
-console.log('TurfMate smoke tests passed.');
+console.log('TurfMate smoke tests passed, including cinematic scroll checks.');
+
+assert.match(js, /cinema-touchline/);
+assert.match(js, /cinema-copy-four/);
+assert.match(js, /requestAnimationFrame\(tick\)/);
+assert.match(css, /perspective:1400px/);
+assert.match(css, /prefers-reduced-motion/);
