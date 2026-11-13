@@ -4,10 +4,10 @@
 
 TurfMate helps players discover football turfs, compare venues and plan a game. The website is being built first; the Android app will follow only after the website and shared booking backend are production-ready.
 
-## Current release: v0.6 football-flight cinematic website
+## Current release: v0.7 aerial-to-pitch football cinema
 
-- Eight-chapter cinematic homepage inspired by the supplied iStock references: sports-intro typography → aerial stadium approach → descent into the bowl → pitch-level entry → football flight → goal shot → slow-motion net impact → final stadium reveal.
-- The ball now travels on a rising shot trajectory toward the goal; the camera follows it across the field and moves closer during the goal moment. A procedural net flexes at impact and a restrained light pulse marks the finish.
+- Eight-chapter cinematic homepage inspired by the supplied Instagram/iStock visual direction: sports-intro typography → high aerial stadium view → steep camera dive into the pitch → low ball-follow camera → dribble and rising football shot → slow-motion net impact → final stadium reveal.
+- The opening camera starts much higher above the stadium, dives toward the centre of the field, tightens its lens and hands off smoothly to a low football-follow camera. The ball dribbles across the grass, accelerates and rises toward the goal; the camera follows it and closes in during the goal moment. A procedural net flexes at impact and a restrained light pulse marks the finish.
 - The sequence remains tied to native page scrolling across the homepage and reverses naturally when scrolling upward.
 - Dynamic Three.js loading with a visible 2D cinematic photo-and-football fallback if WebGL or the external module cannot initialise; no silent black hero.
 - Real Dhaka venue discovery seeded from public venue information, with official links and venue-photo sources where available.
