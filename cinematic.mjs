@@ -14,7 +14,7 @@
     const ctx=canvas.getContext('2d');if(!ctx){console.warn('Canvas fallback unavailable.',error);return;}
     let w=innerWidth,h=innerHeight,dpr=1,p=0,active=false,paused=false,chapter=-1;
     const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t)};
-    const scenes=[[0,'STADIUM APPROACH'],[.12,'DESCEND INTO THE BOWL'],[.25,'ENTER THE PITCH'],[.4,'FOLLOW THE FOOTBALL'],[.6,'CROSS THE FIELD'],[.78,'MATCHDAY COMMUNITY'],[.92,'THE FINAL WHISTLE']];
+    const scenes=[[0,'SPORT INTRO · AERIAL VIEW'],[.12,'DESCEND INTO THE BOWL'],[.24,'PITCH-LEVEL ENTRY'],[.4,'THE BALL TAKES FLIGHT'],[.58,'TRACK THE SHOT'],[.74,'GOAL · SLOW MOTION'],[.86,'MATCHDAY COMMUNITY'],[.95,'THE FINAL WHISTLE']];
     const hud=document.createElement('div');hud.className='tm-cinema-hud';hud.hidden=true;hud.innerHTML='<span class="hud-index">01 / 07</span><span class="hud-scene">STADIUM APPROACH</span><span class="hud-track"><span></span></span><button type="button" aria-label="Pause ball motion">Ⅱ</button>';document.body.appendChild(hud);
     const idx=hud.querySelector('.hud-index'),label=hud.querySelector('.hud-scene'),bar=hud.querySelector('.hud-track span'),toggle=hud.querySelector('button');
     toggle.addEventListener('click',()=>{paused=!paused;toggle.textContent=paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',paused?'Resume ball motion':'Pause ball motion');});
@@ -23,7 +23,7 @@
     function update(){
       const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);p=reduce.matches?0:clamp(scrollY/max,0,1);
       let c=0;for(let i=0;i<scenes.length;i++)if(p>=scenes[i][0])c=i;
-      if(c!==chapter){chapter=c;idx.textContent=String(c+1).padStart(2,'0')+' / 07';label.textContent=scenes[c][1];}
+      if(c!==chapter){chapter=c;idx.textContent=String(c+1).padStart(2,'0')+' / 08';label.textContent=scenes[c][1];}
       bar.style.width=(p*100)+'%';
       photoA.style.opacity=String(clamp(1-smooth((p-.12)/.22)+smooth((p-.82)/.18),0,1));
       photoB.style.opacity=String(clamp(smooth((p-.12)/.2)*(1-smooth((p-.78)/.18)),0,1));
@@ -43,8 +43,9 @@
     function draw(now){
       requestAnimationFrame(draw);if(!active||document.hidden)return;ctx.clearRect(0,0,w,h);
       const shade=ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'rgba(2,10,6,.28)');shade.addColorStop(.5,'rgba(2,10,6,.02)');shade.addColorStop(1,'rgba(2,10,6,.55)');ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
-      const q=smooth((p-.15)/.82),x=w*(.5+Math.sin(q*Math.PI*3.2)*.3),y=h*(.62+Math.sin(q*Math.PI*6.4)*.11),radius=clamp(Math.min(w,h)*(.028+(1-q)*.018),17,54);
-      if(p>.13&&p<.98){ctx.strokeStyle='rgba(198,255,131,.35)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-radius*2.7,y+radius*.8);ctx.quadraticCurveTo(x-radius*1.5,y+radius*1.6,x-radius*.8,y+radius*.3);ctx.stroke();drawBall(x,y,radius,paused||reduce.matches?0:q*16+now*.0008);}
+      const q=smooth((p-.22)/.62),x=w*(.12+.73*q),y=h*(.66-.31*Math.sin(q*Math.PI*.78)-.035*q),radius=clamp(Math.min(w,h)*(.022+q*.018),16,58);
+      if(p>.60){const gx=w*.83,gy=h*.43,gw=w*.13,gh=h*.22,goalAlpha=smooth((p-.60)/.08);ctx.save();ctx.globalAlpha=goalAlpha;ctx.strokeStyle='rgba(232,246,231,.72)';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(gx,gy);ctx.lineTo(gx+gw,gy+gh*.12);ctx.lineTo(gx+gw,gy+gh);ctx.lineTo(gx,gy+gh*.88);ctx.stroke();for(let i=1;i<7;i++){const xx=gx+gw*i/7;ctx.beginPath();ctx.moveTo(xx,gy+gh*i/20);ctx.lineTo(xx,gy+gh*.88+gh*i/20);ctx.stroke();}for(let i=1;i<6;i++){const yy=gy+gh*i/6;ctx.beginPath();ctx.moveTo(gx,yy);ctx.lineTo(gx+gw,yy+gh*.12);ctx.stroke();}ctx.restore();}
+      if(p>.22&&p<.91){const slow=q>.86&&q<.99?.28:1;ctx.strokeStyle='rgba(198,255,131,.4)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(w*.12,h*.66);ctx.quadraticCurveTo(w*.42,h*.22,x-radius,y);ctx.stroke();drawBall(x,y,radius,paused||reduce.matches?0:q*16*slow+now*.00045);}
     }
     canvas.style.opacity='1';requestAnimationFrame(draw);console.warn('TurfMate is using the photo-and-football fallback because WebGL/Three.js could not initialise.',error);
   };
@@ -150,6 +151,15 @@
   }
   goal(-52.5,1);goal(52.5,-1);
 
+  const netBase=[],netPositions=[],netCols=12,netRows=8,netX=56.05;
+  const netPoint=(col,row)=>[netX,row/netRows*2.42,(col/netCols-.5)*7.25];
+  for(let row=0;row<=netRows;row++)for(let col=0;col<netCols;col++){netPositions.push(...netPoint(col,row),...netPoint(col+1,row));}
+  for(let col=0;col<=netCols;col++)for(let row=0;row<netRows;row++){netPositions.push(...netPoint(col,row),...netPoint(col,row+1));}
+  for(let i=0;i<netPositions.length;i+=3)netBase.push([netPositions[i],netPositions[i+1],netPositions[i+2]]);
+  const netGeometry=new THREE.BufferGeometry();netGeometry.setAttribute('position',new THREE.Float32BufferAttribute(netPositions,3));netGeometry.attributes.position.setUsage(THREE.DynamicDrawUsage);
+  const goalNet=new THREE.LineSegments(netGeometry,new THREE.LineBasicMaterial({color:0xe4eee4,transparent:true,opacity:.7}));scene.add(goalNet);
+  const goalFlash=new THREE.PointLight(0xbaff8c,0,32,2);goalFlash.position.set(54.5,2,0);scene.add(goalFlash);
+
   for(const sx of [-1,1])for(const sz of [-1,1]){
     const x=sx*72,z=sz*63,pole=new THREE.Mesh(new THREE.CylinderGeometry(.32,.62,34,8),mat(0x263a30,.6,.5));
     pole.position.set(x,19,z);scene.add(pole);
@@ -175,7 +185,7 @@
   }
   const ball=new THREE.Mesh(new THREE.SphereGeometry(1.08,48,32),new THREE.MeshPhysicalMaterial({map:makeBallTexture(),roughness:.43,clearcoat:.32}));
   ball.castShadow=true;scene.add(ball);
-  const ballPath=new THREE.CatmullRomCurve3([[-46,1.25,25],[-34,1.25,12],[-16,1.25,1],[8,1.25,-13],[32,1.25,-20],[46,1.25,-4],[30,1.25,13],[5,1.25,24],[-23,1.25,15],[-43,1.25,-5],[-17,1.25,-24],[17,1.25,-17],[45,1.25,25]].map(p=>new THREE.Vector3(...p)),false,'catmullrom',.45);
+  const ballPath=new THREE.CatmullRomCurve3([[-46,1.25,22],[-35,1.25,14],[-22,1.25,7],[-9,1.35,2],[5,1.6,0],[18,4.4,0],[31,7.6,0],[41,6.8,0],[48,4.5,0],[53.5,2.9,0],[57.5,1.9,0]].map(p=>new THREE.Vector3(...p)),false,'catmullrom',.45);
   const entryCam=new THREE.CatmullRomCurve3([[0,112,160],[64,78,126],[56,42,82],[-16,19,54],[-55,5.5,34]].map(p=>new THREE.Vector3(...p)));
   const entryLook=new THREE.CatmullRomCurve3([[0,0,0],[0,0,0],[-5,0,0],[-26,0,12],[-36,0,20]].map(p=>new THREE.Vector3(...p)));
   const exitCam=new THREE.CatmullRomCurve3([[39,5,19],[64,18,48],[26,48,106],[0,106,164]].map(p=>new THREE.Vector3(...p)));
@@ -186,7 +196,7 @@
   document.body.appendChild(hud);
   const idx=hud.querySelector('.hud-index'),label=hud.querySelector('.hud-scene'),bar=hud.querySelector('.hud-track span'),toggle=hud.querySelector('button');
   toggle.addEventListener('click',()=>{paused=!paused;toggle.textContent=paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',paused?'Resume ambient motion':'Pause ambient motion');});
-  const chapters=[[0,'STADIUM APPROACH'],[.13,'ENTER THE BOWL'],[.25,'DROP TO THE TOUCHLINE'],[.4,'FOLLOW THE FOOTBALL'],[.6,'TRAVEL THE PITCH'],[.78,'MATCHDAY COMMUNITY'],[.91,'THE FINAL WHISTLE']];
+  const chapters=[[0,'SPORT INTRO · AERIAL VIEW'],[.12,'DESCEND INTO THE BOWL'],[.24,'PITCH-LEVEL ENTRY'],[.4,'THE BALL TAKES FLIGHT'],[.58,'TRACK THE SHOT'],[.74,'GOAL · SLOW MOTION'],[.86,'MATCHDAY COMMUNITY'],[.95,'THE FINAL WHISTLE']];
   function updatePhotoPlates(){
     photoA.style.opacity=String(1-smooth((progress-.04)/.22));
     photoB.style.opacity=String(clamp(smooth((progress-.1)/.2)*(1-smooth((progress-.32)/.16)),0,1));
@@ -211,15 +221,19 @@
   addEventListener('turfmate:page-rendered',routeSync);new MutationObserver(routeSync).observe(app,{childList:true});routeSync();
   function animate(now){
     requestAnimationFrame(animate);if(!active||document.hidden)return;
-    const dt=Math.min(.05,(now-last)/1000);last=now;const p=progress,q=smooth((p-.23)/.64);
-    const bp=ballPath.getPointAt(q),tan=ballPath.getTangentAt(q).normalize();ball.position.copy(bp);ball.visible=p>.12&&p<.96;
-    if(!paused&&!reduce.matches){ball.rotation.x+=dt*2.5;ball.rotation.z+=dt*3.2;}
+    const dt=Math.min(.05,(now-last)/1000);last=now;const p=progress,q=smooth((p-.22)/.62);
+    const bp=ballPath.getPointAt(q),tan=ballPath.getTangentAt(q).normalize();ball.position.copy(bp);ball.visible=p>.20&&p<.91;
+    const goalSlow=smooth((q-.82)/.08)*(1-smooth((q-.985)/.015));
+    if(!paused&&!reduce.matches){ball.rotation.x+=dt*(2.5-goalSlow*2.0);ball.rotation.z+=dt*(3.2-goalSlow*2.55);}
+    const impact=smooth((q-.91)/.035)*(1-smooth((q-.995)/.02));
+    if(netGeometry){const attr=netGeometry.attributes.position;for(let i=0;i<netBase.length;i++){const v=netBase[i],dx=(v[1]-1.22)/.92,dz=v[2]/2.6,falloff=Math.exp(-(dx*dx+dz*dz)*1.1);attr.array[i*3]=v[0]+impact*1.55*falloff;attr.array[i*3+1]=v[1];attr.array[i*3+2]=v[2];}attr.needsUpdate=true;netGeometry.computeBoundingSphere();}
+    if(goalFlash)goalFlash.intensity=impact*5.5;
     let pos,target;
     if(reduce.matches){pos=new THREE.Vector3(0,48,108);target=new THREE.Vector3(0,0,0);}
     else if(p<.23){const t=smooth(p/.23);pos=entryCam.getPointAt(t);target=entryLook.getPointAt(t);}
-    else if(p<.87){pos=bp.clone().addScaledVector(tan,-9).add(new THREE.Vector3(0,3.9,0));target=bp.clone().addScaledVector(tan,7).add(new THREE.Vector3(0,.25,0));}
+    else if(p<.87){const close=smooth((q-.76)/.19),distance=9-close*4.8,height=3.9+close*.8,lookAhead=7+close*2.2;pos=bp.clone().addScaledVector(tan,-distance).add(new THREE.Vector3(0,height,0));target=bp.clone().addScaledVector(tan,lookAhead).add(new THREE.Vector3(0,.25,0));}
     else{const t=smooth((p-.87)/.13);pos=exitCam.getPointAt(t);target=new THREE.Vector3(0,0,0);}
-    camera.position.lerp(pos,reduce.matches ? .08 : .065);look.lerp(target,reduce.matches ? .08 : .075);camera.lookAt(look);canvas.style.opacity=String(reduce.matches?1:smooth((p-.015)/.12));renderer.render(scene,camera);
+    camera.position.lerp(pos,reduce.matches ? .08 : .075);look.lerp(target,reduce.matches ? .08 : .085);camera.lookAt(look);camera.rotation.z=reduce.matches?0:Math.sin(q*Math.PI*2)*.012;canvas.style.opacity=String(reduce.matches?1:smooth((p-.015)/.12));renderer.render(scene,camera);
   }
   requestAnimationFrame(animate);
   if(reduce.addEventListener)reduce.addEventListener('change',readScroll);
