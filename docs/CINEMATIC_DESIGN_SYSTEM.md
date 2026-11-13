@@ -1,4 +1,4 @@
-# TurfMate cinematic design system — v0.5
+# TurfMate cinematic design system — v0.7
 
 ## Visual direction
 Use the supplied TurfMate reference images as the visual source of truth: night-match photography, dark forest-green/charcoal surfaces, vivid lime accents, realistic pitch lighting, glass-like information panels, strong condensed display typography and clear booking actions. Keep Academy, Community, Tournaments and Store in the same visual system.
@@ -14,6 +14,19 @@ The owner supplied four iStock references. Their creative cues are translated in
 | Ball bending the net in slow motion | Close approach to the goal, scroll-controlled slow-motion rotation, a flexing procedural goal net and a subtle impact light pulse |
 
 The stock URLs are references, not playable MP4 sources. Do not hotlink, scrape, or download iStock preview media. If the project owner purchases the clips, add the licensed MP4s under `assets/video/` and wire them as muted, autoplay, playsinline, looped decorative layers with the procedural 3D scene retained as the interactive camera/ball layer.
+
+## Aerial-to-pitch camera choreography
+
+The opening is a deliberate drone-to-player transition, not a generic zoom on one still image:
+
+1. **Establish the stadium:** begin from a high, wide aerial angle, with the entire bowl and pitch visible.
+2. **Dive into the field:** move down toward the centre of the pitch while tightening the camera field of view. The aerial photo plate zooms and fades as the procedural 3D stadium becomes dominant.
+3. **Find the football:** finish the dive just behind the ball at low pitch height, so the camera handoff into the ball-follow path feels continuous.
+4. **Dribble and accelerate:** keep the ball near the centre of the frame while it moves across the grass with a subtle ground bounce.
+5. **Lift the shot:** raise the ball toward the far goal and bring the camera closer for the final seconds.
+6. **Land the goal:** flex the procedural net at impact, then crane back to a wide stadium reveal.
+
+The camera uses scroll progress for position, aim and lens changes, so the whole shot reverses naturally when the visitor scrolls upward. The ball's dribble, flight and camera handoff are one continuous path, rather than separate animation cards.
 
 ## Continuous scroll story
 | Scroll chapter | Visual / camera | Homepage content |
@@ -33,7 +46,7 @@ The scene progress is tied to the entire homepage scroll range, including the fo
 - Existing static HTML/CSS/JavaScript and GitHub Pages deployment are retained.
 - Three.js is loaded dynamically so a CDN or WebGL failure does not stop the rest of the experience.
 - A persistent transparent WebGL canvas renders the procedural stadium, instanced crowd, pitch markings, goals, floodlights, city silhouettes and a textured football.
-- The aerial and pitch-action photo plates are cropped from the project owner's supplied TurfMate visual references and crossfade as the camera descends.
+- The aerial and pitch-action photo plates are cropped from the project owner's supplied TurfMate visual references and crossfade as the camera descends. The opening now begins at a much higher aerial angle and dives almost vertically toward the field before handing off to the ball-follow camera. The camera lens tightens during the descent.
 - A 2D canvas fallback uses the same supplied image plates and a moving football if WebGL is unavailable.
 - Reduced-motion preferences are respected; the site remains readable and usable without camera travel.
 - The cinematic canvas is layered behind semantic HTML; navigation, booking controls and venue cards remain interactive.
