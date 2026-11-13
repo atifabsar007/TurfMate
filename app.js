@@ -1,8 +1,9 @@
 const venues=[
 {id:'turfnation',name:'Turf Nation',area:'Tejgaon',address:'A, 115–116 Bir Uttam Mir Shawkat Sarak, Dhaka 1208',price:0,rating:null,reviews:0,sports:['Football','Cricket'],amenities:['FIFA-certified 60mm turf','Cafe','Parking'],label:'Multi-sport venue',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Venue details on official site',description:'A multi-sport venue with two artificial football turfs, short-pitch cricket arenas, a café and basement parking.',image:'https://turfnationbd.com/_next/image?q=75&url=%2F_next%2Fstatic%2Fmedia%2F1.2e25ad44.jpg&w=3840',website:'https://turfnationbd.com/',slots:[]},
-{id:'jaff',name:'JAFF Arena & Academy',area:'Bashundhara R/A',address:'JAFF Street, Bashundhara Main Gate, opposite Jamuna Future Park side gate, Dhaka',price:0,rating:null,reviews:0,sports:['Football','Futsal'],amenities:['FIFA-certified turf','Lockers & showers','Spectator seating'],label:'Arena + academy',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'5/6-a-side indoor futsal',description:'An indoor futsal arena and football academy with engineered lighting, locker and shower facilities, and seating for spectators.',image:'https://www.jaff.com.bd/public/img/slider/22UPI.jpg',website:'https://www.jaff.com.bd/',slots:[]},
-{id:'corex',name:'Corex Arena & Academy',area:'Mirpur',address:'Plot 217, Block B, Road 4, Shagufta Housing, Mirpur 12, Dhaka 1216',price:2000,rating:null,reviews:0,sports:['Football'],amenities:['Floodlights','HD match view','Academy sessions'],label:'Day slots from ৳2,000',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Small-sided football',description:'A football turf and academy in Shagufta Housing, Mirpur 12. Its official site lists day slots from ৳2,000 and night slots from ৳4,000 per 90-minute session.',image:'https://images.unsplash.com/photo-1556056504-5c7696c4c28d?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600',website:'https://www.corexarena.com/',slots:[]},
-{id:'crossbar',name:'Crossbar Metro Arena',area:'Uttara',address:'Beside Uttara Center Metro Station, Uttara, Dhaka',price:0,rating:null,reviews:0,sports:['Football'],amenities:['400-lux LED lighting','50mm monofilament turf','Metro access'],label:'Metro-side pitch',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Small-sided football',description:'A floodlit outdoor football turf beside Uttara Center Metro Station. The venue publishes a gallery, 400-lux lighting and 50mm monofilament turf specifications.',image:'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=85',website:'https://www.bookcrossbar.com/gallery',slots:[]},
+{id:'jaff',name:'JAFF Arena & Academy',area:'Bashundhara R/A',address:'JAFF Street, Bashundhara Main Gate, opposite Jamuna Future Park side gate, Dhaka',price:0,rating:null,reviews:0,sports:['Football','Futsal'],amenities:['FIFA-certified turf','Lockers & showers','Spectator seating'],label:'Arena + academy',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'5/6-a-side indoor futsal',description:'An indoor futsal arena and football academy with engineered lighting, locker and shower facilities, and seating for spectators.',image:'https://www.jaff.com.bd/public/img/single_image/ZfUyabout.jpg',website:'https://www.jaff.com.bd/',slots:[]},
+{id:'dbox',name:'DBox Sports Complex',area:'Mirpur 12',address:'Plot 217, Block B, Road 3, Mirpur 12, Dhaka 1216',price:0,rating:null,reviews:0,sports:['Football','Futsal'],amenities:['Floodlit turf','Multi-sport complex'],label:'Mirpur 12 · futsal',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Small-sided football',description:'A multi-sport venue in Mirpur 12 / Pallabi known for its football and futsal turf. Confirm current pricing and slot availability directly with the venue.',image:'https://cdn.moumachi.com.bd/listings/2025-02/20806/images/original/20253-11243_d-box-field.png',website:'https://www.google.com/maps/search/?api=1&query=DBox+Sports+Complex+Dhaka',slots:[]},
+{id:'corex',name:'Corex Arena & Academy',area:'Mirpur',address:'Plot 217, Block B, Road 4, Shagufta Housing, Mirpur 12, Dhaka 1216',price:2000,rating:null,reviews:0,sports:['Football'],amenities:['Floodlights','HD match view','Academy sessions'],label:'Day slots from ৳2,000',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Small-sided football',description:'A football turf and academy in Shagufta Housing, Mirpur 12. Its official site lists day slots from ৳2,000 and night slots from ৳4,000 per 90-minute session.',image:'',website:'https://www.corexarena.com/',slots:[]},
+{id:'crossbar',name:'Crossbar Metro Arena',area:'Uttara',address:'Beside Uttara Center Metro Station, Uttara, Dhaka',price:0,rating:null,reviews:0,sports:['Football'],amenities:['400-lux LED lighting','50mm monofilament turf','Metro access'],label:'Metro-side pitch',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Small-sided football',description:'A floodlit outdoor football turf beside Uttara Center Metro Station. The venue publishes a gallery, 400-lux lighting and 50mm monofilament turf specifications.',image:'',website:'https://www.bookcrossbar.com/gallery',slots:[]},
 {id:'nde',name:'NDE Sports Facility',area:'Bashundhara R/A',address:'Road 5, Bashundhara Residential Area, Dhaka 1229',price:0,rating:null,reviews:0,sports:['Football'],amenities:['Artificial football turf'],label:'Bashundhara pick',available:0,times:['Morning','Afternoon','Evening','Night'],capacity:'Small-sided football',description:'A small-sided football turf in Bashundhara Residential Area. Contact the venue to confirm current pricing and open sessions.',image:'',website:'https://www.google.com/maps/search/?api=1&query=NDE+Sports+Facility+Dhaka',slots:[]}
 ];
 const areas=['Bashundhara R/A','Tejgaon','Uttara','Mirpur','Aftabnagar','Mohammadpur','Khilgaon'];
@@ -17,16 +18,82 @@ function dateObj(offset){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.get
 function dateLabel(offset){const d=dateObj(offset);return {day:d.toLocaleDateString('en-US',{weekday:'short'}),date:d.getDate(),month:d.toLocaleDateString('en-US',{month:'short'})}}
 function art(label='PITCH / DHAKA',v){return `<div class="venue-art ${v?.image?'has-photo':''}" aria-hidden="true">${v?.image?`<img src="${esc(v.image)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="art-lines"></span><span class="art-label">${esc(label)}</span><span class="venue-badge">${esc(v?.label||'TurfMate pick')}</span>${v?`<button class="favorite ${state.favorites.has(v.id)?'saved':''}" data-action="favorite" data-id="${v.id}" aria-label="${state.favorites.has(v.id)?'Remove':'Save'} ${esc(v.name)}">${state.favorites.has(v.id)?'♥':'♡'}</button>`:''}</div>`}
 function card(v){return `<article class="venue-card" data-open-venue="${v.id}">${art(v.area.toUpperCase(),v)}<div class="venue-info"><div class="venue-top"><div><h3>${esc(v.name)}</h3><div class="venue-area">⌖ ${esc(v.area)}, Dhaka</div></div><div class="rating">${v.rating?'<b>★</b> '+v.rating.toFixed(1):'<span>Rating pending</span>'}</div></div><p class="venue-description">${esc(v.description)}</p><div class="tags">${v.sports.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}${v.amenities.slice(0,1).map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div><div class="venue-bottom"><div><div class="price-label">${v.price>0?'Starting from':'Pricing'}</div><div class="price">${money(v.price)} ${v.price>0?'<small>/ 90 min</small>':''}</div></div><a class="venue-official" href="${esc(v.website)}" target="_blank" rel="noopener noreferrer">Official info ↗</a></div></div></article>`}function home(){return `
-<section class="cinema-section" id="cinematic" aria-label="TurfMate stadium experience">
+<section class="cinema-section" id="cinematic" aria-label="TurfMate cinematic stadium-to-pitch experience">
   <div class="cinema-sticky">
-    <div class="cinema-aerial"></div><div class="cinema-pitch"></div><div class="cinema-vignette"></div><div class="cinema-grid"></div>
-    <div class="cinema-light light-left"></div><div class="cinema-light light-right"></div>
-    <div class="cinema-topline"><span><i class="live-dot"></i> DHAKA · NIGHT GAME CULTURE</span><span>01 / FIND YOUR PITCH</span></div>
-    <div class="cinema-copy cinema-copy-one is-active"><span class="eyebrow">THE CITY IS YOUR STADIUM</span><h1>FIND YOUR<br><em>PITCH.</em></h1><p>Every squad has a next game. Find the ground, pick your time and get closer to kick-off.</p><a class="btn btn-lime" href="#/explore">Explore real venues <span>↗</span></a></div>
-    <div class="cinema-copy cinema-copy-two"><span class="eyebrow">FROM THE STANDS TO THE SIDELINE</span><h2>GET CLOSER<br>TO THE GAME.</h2><p>Move from the city lights to the touchline. Your next match is only a few taps away.</p><a class="text-link" href="#/explore">Find a pitch near you ↗</a></div>
-    <div class="cinema-copy cinema-copy-three"><span class="eyebrow">YOUR SQUAD. YOUR TIME.</span><h2>BOOK THE<br><em>90 MINUTES.</em></h2><p>Compare venues and check the official details before you make your move.</p><a class="btn btn-lime" href="#/explore">Choose your turf <span>↗</span></a></div>
-    <div class="cinema-ball" aria-hidden="true">⚽</div>
-    <div class="cinema-sidecard"><div class="sidecard-head"><span><i class="live-dot"></i> DHAKA VENUE RADAR</span><small>REAL PLACES</small></div><a href="https://turfnationbd.com/" target="_blank" rel="noopener noreferrer"><b>Turf Nation</b><span>Tejgaon</span><strong>↗</strong></a><a href="https://www.jaff.com.bd/" target="_blank" rel="noopener noreferrer"><b>JAFF Arena</b><span>Bashundhara R/A</span><strong>↗</strong></a><a href="https://www.corexarena.com/" target="_blank" rel="noopener noreferrer"><b>Corex Arena</b><span>Mirpur 12</span><strong>↗</strong></a></div>
+    <div class="cinema-aerial" aria-hidden="true"></div>
+    <div class="cinema-stands" aria-hidden="true"></div>
+    <div class="cinema-pitch" aria-hidden="true"></div>
+    <div class="cinema-touchline" aria-hidden="true"></div>
+    <div class="cinema-vignette" aria-hidden="true"></div>
+    <div class="cinema-grid" aria-hidden="true"></div>
+    <div class="cinema-light light-left" aria-hidden="true"></div>
+    <div class="cinema-light light-right" aria-hidden="true"></div>
+
+    <div class="cinema-topline">
+      <span><i class="live-dot"></i> DHAKA · NIGHT GAME CULTURE</span>
+      <span data-scene-label>01 / AERIAL VIEW</span>
+    </div>
+
+    <div class="cinema-copy cinema-copy-one is-active">
+      <span class="eyebrow">THE CITY IS YOUR STADIUM</span>
+      <h1>FIND YOUR<br><em>PITCH.</em></h1>
+      <p>From the city lights to the green below. Discover real football grounds across Dhaka and get your squad ready.</p>
+      <a class="btn btn-lime" href="#/explore">Explore real venues <span>↗</span></a>
+    </div>
+
+    <div class="cinema-copy cinema-copy-two">
+      <span class="eyebrow">HEAR THE GAME. FEEL THE ENERGY.</span>
+      <h2>FEEL THE<br><em>CROWD.</em></h2>
+      <p>The camera sweeps past the stands and floodlights, bringing you closer to the atmosphere of a night match.</p>
+      <a class="text-link" href="#/explore">See Dhaka venues ↗</a>
+    </div>
+
+    <div class="cinema-copy cinema-copy-three">
+      <span class="eyebrow">FROM THE SIDELINE</span>
+      <h2>OWN THE<br><em>TOUCHLINE.</em></h2>
+      <p>Get down to pitch level. Compare the venue, check the details and choose where your next match begins.</p>
+      <a class="text-link" href="#/explore">Choose your pitch ↗</a>
+    </div>
+
+    <div class="cinema-copy cinema-copy-four">
+      <span class="eyebrow">YOUR SQUAD. YOUR 90 MINUTES.</span>
+      <h2>LET'S<br><em>KICK OFF.</em></h2>
+      <p>One ball. One pitch. Your people. Find the right turf and make game night happen.</p>
+      <a class="btn btn-lime" href="#/explore">Book your next game <span>↗</span></a>
+    </div>
+
+    <div class="cinema-ball" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="presentation">
+        <defs>
+          <radialGradient id="tm-ball-shade" cx="34%" cy="27%" r="72%">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset=".62" stop-color="#e9f0e8"/>
+            <stop offset="1" stop-color="#8fa394"/>
+          </radialGradient>
+          <linearGradient id="tm-ball-panel" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#25342c"/>
+            <stop offset="1" stop-color="#07120c"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="47" fill="url(#tm-ball-shade)" stroke="#ffffff" stroke-opacity=".72" stroke-width="1.5"/>
+        <path d="M50 20 63 29 58 44 42 44 37 29Z" fill="url(#tm-ball-panel)"/>
+        <path d="M37 29 25 27 15 39 21 54 38 54 42 44Z" fill="url(#tm-ball-panel)"/>
+        <path d="M63 29 76 27 86 40 79 55 62 54 58 44Z" fill="url(#tm-ball-panel)"/>
+        <path d="M21 54 15 68 27 82 42 76 44 59 38 54Z" fill="url(#tm-ball-panel)"/>
+        <path d="M79 55 85 69 73 83 58 76 56 59 62 54Z" fill="url(#tm-ball-panel)"/>
+        <path d="M42 76 50 86 58 76 56 59 44 59Z" fill="url(#tm-ball-panel)"/>
+        <path d="M50 20 50 9M25 27 17 18M76 27 84 18M15 68 7 72M85 69 93 73" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="cinema-sidecard">
+      <div class="sidecard-head"><span><i class="live-dot"></i> DHAKA VENUE RADAR</span><small>REAL PLACES</small></div>
+      <a href="https://turfnationbd.com/" target="_blank" rel="noopener noreferrer"><b>Turf Nation</b><span>Tejgaon</span><strong>↗</strong></a>
+      <a href="https://www.jaff.com.bd/" target="_blank" rel="noopener noreferrer"><b>JAFF Arena</b><span>Bashundhara R/A</span><strong>↗</strong></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=DBox+Sports+Complex+Dhaka" target="_blank" rel="noopener noreferrer"><b>DBox Sports</b><span>Mirpur 12</span><strong>↗</strong></a>
+      <a href="https://www.bookcrossbar.com/" target="_blank" rel="noopener noreferrer"><b>Crossbar Metro</b><span>Uttara Sector 17</span><strong>↗</strong></a>
+    </div>
+
     <div class="cinema-scrollhint"><span class="scroll-wheel"></span><span>SCROLL TO ENTER THE GAME</span><b>↓</b></div>
     <div class="cinema-progress"><span></span></div>
   </div>
@@ -109,7 +176,105 @@ function partnerPage(){return `<section class="partner-layout container"><div cl
 function savedPage(){const list=venues.filter(v=>state.favorites.has(v.id));return `<section class="page-hero"><div class="container"><div class="eyebrow">Your shortlist</div><h1>Keep your favourite<br>pitches close.</h1><p>Saved venues stay on this device in this prototype. Sign-in and account sync will come later.</p></div></section><section class="section"><div class="container"><div class="saved-list">${list.length?list.map(card).join(''):`<div class="empty"><h3>No saved turfs yet</h3><p>Tap the heart on a venue card to keep it in your shortlist.</p><a class="btn btn-dark" href="#/explore">Explore turfs ↗</a></div>`}</div></div></section>`}
 function bookingsPage(){return `<section class="page-hero"><div class="container"><div class="eyebrow">My bookings</div><h1>Your next game,<br>all in one place.</h1><p>Confirmed reservations and gate passes will appear here after secure sign-in and booking services are connected.</p></div></section><section class="section"><div class="container"><div class="empty"><h3>No bookings yet</h3><p>This prototype does not create real reservations. Start by exploring sample venues and testing the demo booking journey.</p><a class="btn btn-dark" href="#/explore">Find a pitch ↗</a></div></div></section>`}
 function aboutPage(){return `<section class="page-hero"><div class="container"><div class="eyebrow">About TurfMate</div><h1>Made for the people<br>who love the game.</h1><p>TurfMate is a Dhaka-first sports booking concept built to make finding and reserving a football pitch less stressful.</p></div></section><section class="section"><div class="container"><div class="feature-card"><h3>Our starting point</h3><p>Players should be able to compare venues, understand schedules and reserve a pitch without calling around or travelling just to check availability. We are starting with reliable booking, then growing into a wider football ecosystem.</p></div></div></section>`}
-function initCinematicMotion(){const root=document.querySelector('.cinema-section');if(root){if(window.__turfmateCinemaScroll)window.removeEventListener('scroll',window.__turfmateCinemaScroll);const update=()=>{const distance=Math.max(1,root.offsetHeight-window.innerHeight);const p=Math.max(0,Math.min(1,-root.getBoundingClientRect().top/distance));root.style.setProperty('--scene-progress',p.toFixed(4));const steps=root.querySelectorAll('.cinema-copy');const active=p<.34?0:p<.69?1:2;steps.forEach((el,i)=>el.classList.toggle('is-active',i===active));};window.__turfmateCinemaScroll=update;window.addEventListener('scroll',update,{passive:true});update();}if(window.__turfmateRevealObserver)window.__turfmateRevealObserver.disconnect();if('IntersectionObserver'in window){window.__turfmateRevealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');window.__turfmateRevealObserver.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('[data-reveal]').forEach(el=>window.__turfmateRevealObserver.observe(el));}document.querySelectorAll('.venue-card,.ecosystem-card').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--tilt-x',((e.clientY-r.top)/r.height-.5)*-5+'deg');el.style.setProperty('--tilt-y',((e.clientX-r.left)/r.width-.5)*5+'deg')});el.addEventListener('pointerleave',()=>{el.style.setProperty('--tilt-x','0deg');el.style.setProperty('--tilt-y','0deg')})});}
+function initCinematicMotion(){
+  if(window.__turfmateCinemaScroll)window.removeEventListener('scroll',window.__turfmateCinemaScroll);
+  if(window.__turfmateCinemaResize)window.removeEventListener('resize',window.__turfmateCinemaResize);
+  if(window.__turfmateCinemaRaf)cancelAnimationFrame(window.__turfmateCinemaRaf);
+  window.__turfmateCinemaRaf=0;
+
+  const root=document.querySelector('.cinema-section');
+  if(root){
+    const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let target=0,current=0,activeScene=-1;
+    const clamp=(n,min=0,max=1)=>Math.max(min,Math.min(max,n));
+    const fade=(value,start,end)=>clamp((value-start)/(end-start));
+    const blend=(value,inStart,inEnd,outStart,outEnd)=>fade(value,inStart,inEnd)*(1-fade(value,outStart,outEnd));
+    const quadratic=(a,b,c,t)=>((1-t)*(1-t)*a)+(2*(1-t)*t*b)+(t*t*c);
+
+    const apply=(p)=>{
+      p=clamp(p);
+      root.style.setProperty('--scene-progress',p.toFixed(4));
+      root.style.setProperty('--stands-opacity',blend(p,.08,.28,.48,.68).toFixed(3));
+      root.style.setProperty('--pitch-opacity',blend(p,.31,.53,.72,.91).toFixed(3));
+      root.style.setProperty('--touchline-opacity',fade(p,.68,.94).toFixed(3));
+
+      const panX=(Math.sin(p*Math.PI*2)*3.8)-(p*2.2);
+      const panY=Math.sin(p*Math.PI*2.3)*1.6;
+      root.style.setProperty('--camera-pan-x',panX.toFixed(2)+'%');
+      root.style.setProperty('--camera-pan-y',panY.toFixed(2)+'%');
+      root.style.setProperty('--camera-roll',(Math.sin(p*Math.PI*2)*1.15).toFixed(2)+'deg');
+
+      const scene=Math.min(3,Math.floor(p*4));
+      if(scene!==activeScene){
+        activeScene=scene;
+        root.querySelectorAll('.cinema-copy').forEach((el,i)=>el.classList.toggle('is-active',i===scene));
+        const label=root.querySelector('[data-scene-label]');
+        if(label)label.textContent=['01 / AERIAL VIEW','02 / STANDS & LIGHTS','03 / PITCH-SIDE VIEW','04 / KICK-OFF'][scene];
+        root.dataset.scene=String(scene+1);
+      }
+
+      const scaled=p*3;
+      const segment=Math.min(2,Math.floor(scaled));
+      const t=segment===2&&p===1?1:scaled-segment;
+      const paths=[
+        {x:[12,36,51],y:[78,18,54]},
+        {x:[51,72,88],y:[54,91,43]},
+        {x:[88,70,62],y:[43,18,72]}
+      ];
+      const path=paths[segment];
+      const ballX=quadratic(path.x[0],path.x[1],path.x[2],t);
+      const ballY=quadratic(path.y[0],path.y[1],path.y[2],t);
+      root.style.setProperty('--ball-x',ballX.toFixed(2)+'%');
+      root.style.setProperty('--ball-y',ballY.toFixed(2)+'%');
+      root.style.setProperty('--ball-rotation',(p*1260).toFixed(1)+'deg');
+      root.style.setProperty('--ball-scale',(0.72+Math.sin(p*Math.PI)*0.34).toFixed(3));
+      root.style.setProperty('--ball-depth',(90+Math.sin(p*Math.PI)*190).toFixed(0)+'px');
+    };
+
+    const measure=()=>{
+      const distance=Math.max(1,root.offsetHeight-window.innerHeight);
+      target=clamp(-root.getBoundingClientRect().top/distance);
+      if(reduceMotion){current=target;apply(current);return}
+      if(!window.__turfmateCinemaRaf)window.__turfmateCinemaRaf=requestAnimationFrame(tick);
+    };
+    const tick=()=>{
+      const ease=Math.abs(target-current)>.22?.15:.085;
+      current+=(target-current)*ease;
+      if(Math.abs(target-current)<.0006)current=target;
+      apply(current);
+      if(current!==target)window.__turfmateCinemaRaf=requestAnimationFrame(tick);
+      else window.__turfmateCinemaRaf=0;
+    };
+
+    window.__turfmateCinemaScroll=measure;
+    window.__turfmateCinemaResize=measure;
+    window.addEventListener('scroll',measure,{passive:true});
+    window.addEventListener('resize',measure,{passive:true});
+    measure();
+  }
+
+  if(window.__turfmateRevealObserver)window.__turfmateRevealObserver.disconnect();
+  if('IntersectionObserver'in window){
+    window.__turfmateRevealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        window.__turfmateRevealObserver.unobserve(entry.target);
+      }
+    }),{threshold:.12});
+    document.querySelectorAll('[data-reveal]').forEach(el=>window.__turfmateRevealObserver.observe(el));
+  }
+  document.querySelectorAll('.venue-card,.ecosystem-card').forEach(el=>{
+    el.addEventListener('pointermove',e=>{
+      const r=el.getBoundingClientRect();
+      el.style.setProperty('--tilt-x',((e.clientY-r.top)/r.height-.5)*-5+'deg');
+      el.style.setProperty('--tilt-y',((e.clientX-r.left)/r.width-.5)*5+'deg');
+    });
+    el.addEventListener('pointerleave',()=>{
+      el.style.setProperty('--tilt-x','0deg');
+      el.style.setProperty('--tilt-y','0deg');
+    });
+  });
+}
 function render(){const route=(location.hash.replace(/^#/,'')||'/').split('?')[0];document.body.classList.add('cinema-theme');document.body.classList.toggle('tournament-theme',route==='/tournaments');document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',route==='/'+a.dataset.nav));$('#mobile-nav').classList.remove('open');$('.menu-toggle')?.setAttribute('aria-expanded','false');if(route==='/')app.innerHTML=home();else if(route==='/explore')app.innerHTML=explore();else if(route==='/saved')app.innerHTML=savedPage();else if(route==='/bookings')app.innerHTML=bookingsPage();else if(route==='/tournaments')app.innerHTML=tournamentsPage();else if(route==='/academy'||route==='/community'||route==='/store')app.innerHTML=featurePage(route.slice(1));else if(route==='/partner')app.innerHTML=partnerPage();else if(route==='/about')app.innerHTML=aboutPage();else if(route==='/how-it-works'){app.innerHTML=home();setTimeout(()=>$('#how-it-works')?.scrollIntoView({behavior:'smooth'}),20)}else if(route==='/privacy'||route==='/terms')app.innerHTML=`<section class="page-hero"><div class="container"><div class="eyebrow">Before launch</div><h1>${route==='/privacy'?'Privacy':'Terms'} information</h1><p>Formal policies will be published and reviewed before public launch.</p></div></section>`;else app.innerHTML=`<section class="section"><div class="container"><div class="empty"><h3>That page is out of bounds.</h3><a class="btn btn-dark" href="#/">Back home</a></div></div></section>`;window.scrollTo({top:0,behavior:'auto'});initCinematicMotion();}
 function toast(message){const el=document.createElement('div');el.className='toast';el.textContent=message;$('#toast-region').append(el);setTimeout(()=>el.remove(),3200)}
 function refreshModal(){const v=venues.find(x=>x.id===state.venue);if(v)modal.innerHTML=venueModal(v)}
