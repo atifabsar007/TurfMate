@@ -15,7 +15,7 @@
     let w=innerWidth,h=innerHeight,dpr=1,p=0,active=false,paused=false,chapter=-1;
     const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t)};
     const scenes=[[0,'SPORT INTRO · AERIAL VIEW'],[.12,'DESCEND INTO THE BOWL'],[.24,'PITCH-LEVEL ENTRY'],[.4,'THE BALL TAKES FLIGHT'],[.58,'TRACK THE SHOT'],[.74,'GOAL · SLOW MOTION'],[.86,'MATCHDAY COMMUNITY'],[.95,'THE FINAL WHISTLE']];
-    const hud=document.createElement('div');hud.className='tm-cinema-hud';hud.hidden=true;hud.innerHTML='<span class="hud-index">01 / 07</span><span class="hud-scene">STADIUM APPROACH</span><span class="hud-track"><span></span></span><button type="button" aria-label="Pause ball motion">Ⅱ</button>';document.body.appendChild(hud);
+    const hud=document.createElement('div');hud.className='tm-cinema-hud';hud.hidden=true;hud.innerHTML='<span class="hud-index">01 / 08</span><span class="hud-scene">STADIUM APPROACH</span><span class="hud-track"><span></span></span><button type="button" aria-label="Pause ball motion">Ⅱ</button>';document.body.appendChild(hud);
     const idx=hud.querySelector('.hud-index'),label=hud.querySelector('.hud-scene'),bar=hud.querySelector('.hud-track span'),toggle=hud.querySelector('button');
     toggle.addEventListener('click',()=>{paused=!paused;toggle.textContent=paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',paused?'Resume ball motion':'Pause ball motion');});
     const aerial=new Image(),action=new Image();aerial.src='assets/stadium-aerial.webp';action.src='assets/pitch-action.webp';
@@ -75,7 +75,7 @@
   scene.background=null;
   renderer.setClearColor(0x000000,0);
   scene.fog=new THREE.FogExp2(0x06100a,.0023);
-  const camera=new THREE.PerspectiveCamera(52,innerWidth/innerHeight,.1,700);
+  const camera=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,.1,700);
   camera.position.set(0,112,160);
   const look=new THREE.Vector3();
   scene.add(new THREE.HemisphereLight(0xb8d8c0,0x07140c,1.6),new THREE.AmbientLight(0xc4e4cc,.38));
@@ -224,7 +224,7 @@
   function animate(now){
     requestAnimationFrame(animate);if(!active||document.hidden)return;
     const dt=Math.min(.05,(now-last)/1000);last=now;const p=progress,q=smooth((p-.22)/.62);
-    const bp=ballPath.getPointAt(q),tan=ballPath.getTangentAt(q).normalize();ball.position.copy(bp);ball.visible=p>.205&&p<.91;
+    const bp=ballPath.getPointAt(q),tan=ballPath.getTangentAt(q).normalize();ball.position.copy(bp);if(q<.55)ball.position.y+=Math.abs(Math.sin(q*22*Math.PI))*.2;ball.visible=p>.205&&p<.91;
     const goalSlow=smooth((q-.82)/.08)*(1-smooth((q-.985)/.015));
     if(!paused&&!reduce.matches){ball.rotation.x+=dt*(2.5-goalSlow*2.0);ball.rotation.z+=dt*(3.2-goalSlow*2.55);}
     const impact=smooth((q-.91)/.035)*(1-smooth((q-.995)/.02));
