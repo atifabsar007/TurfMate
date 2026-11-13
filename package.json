@@ -1,8 +1,8 @@
 {
   "name": "turfmate-website",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
-  "description": "TurfMate continuous cinematic 3D stadium and football discovery website.",
+  "description": "TurfMate continuous photo-to-3D cinematic football stadium website.",
   "scripts": {
     "dev": "python3 -m http.server 4173",
     "test": "node --check app.js && node --check cinematic.mjs && node tests/smoke-test.js"

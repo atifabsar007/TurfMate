@@ -254,3 +254,65 @@ body.cinematic-active .cinema-progress{display:none}
 @media(max-width:900px){body.cinematic-active .cinema-copy{left:6%;width:65vw}body.cinematic-active .cinema-sidecard{right:3%;width:235px}}
 @media(max-width:620px){body.cinematic-active .cinema-section,body.cinematic-active .cinema-sticky{min-height:650px}body.cinematic-active .cinema-topline{top:98px;left:20px;right:20px;font-size:7px}body.cinematic-active .cinema-topline span:last-child{display:none}body.cinematic-active .cinema-copy{left:22px;top:24%;width:calc(100% - 44px)}body.cinematic-active .cinema-copy h1{font-size:clamp(64px,18vw,96px);line-height:.82}body.cinematic-active .cinema-copy p{max-width:330px;font-size:12px}body.cinematic-active .cinema-sidecard{top:auto;bottom:86px;right:18px;width:205px;padding:12px 14px}body.cinematic-active .cinema-scrollhint{left:22px;transform:none;bottom:27px;font-size:7px}.tm-cinema-hud{left:12px;bottom:12px;padding:7px 9px;gap:8px}.tm-cinema-hud .hud-track{width:38px}.tm-cinema-hud .hud-scene{max-width:104px;overflow:hidden;text-overflow:ellipsis}.tm-cinema-hud .hud-index{font-size:8px}}
 @media(prefers-reduced-motion:reduce){body.cinematic-active .cinema-section{height:auto;min-height:100svh}body.cinematic-active .cinema-sticky{position:relative;min-height:100svh}body.cinematic-active [data-reveal]{opacity:1;transform:none;transition:none}body.cinematic-active .marquee-track{animation:none}}
+
+/* TurfMate v0.5 — photo-to-3D stadium journey */
+.tm-photo-plate{position:fixed;inset:0;z-index:0;display:none;pointer-events:none;background-position:center center;background-size:cover;background-repeat:no-repeat;opacity:0;will-change:transform,opacity;transform:translateZ(0) scale(1)}
+.tm-photo-plate::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,8,5,.82) 0%,rgba(1,8,5,.42) 43%,rgba(1,8,5,.08) 78%),linear-gradient(0deg,rgba(1,8,5,.75),transparent 36%,rgba(1,8,5,.2))}
+.tm-photo-plate--aerial{background-image:url("assets/stadium-aerial.webp")}
+.tm-photo-plate--action{background-image:url("assets/pitch-action.webp")}
+#turfmate-world-canvas{display:none;position:fixed;inset:0;width:100%;height:100%;z-index:1;opacity:0;pointer-events:none;will-change:opacity;transform:translateZ(0)}
+body.cinematic-active{background:#030906!important;color:#eff7ee}
+body.cinematic-active .notice{position:relative;z-index:31;background:rgba(3,13,8,.94)}
+body.cinematic-active .header{position:sticky;z-index:30;background:rgba(3,13,8,.76);border-color:rgba(185,243,106,.14);backdrop-filter:blur(18px)}
+body.cinematic-active #app{position:relative;z-index:2;background:transparent!important}
+body.cinematic-active .footer{position:relative;z-index:2;background:rgba(3,12,8,.92);backdrop-filter:blur(14px)}
+body.cinematic-active .cinema-section{height:100svh;min-height:660px;background:transparent!important;position:relative;overflow:hidden;isolation:isolate}
+body.cinematic-active .cinema-sticky{height:100%;min-height:660px;position:relative;top:auto;overflow:hidden;background:transparent!important;isolation:isolate}
+body.cinematic-active .cinema-aerial,body.cinematic-active .cinema-pitch,body.cinematic-active .cinema-grid,body.cinematic-active .cinema-light,body.cinematic-active .cinema-ball{display:none!important}
+body.cinematic-active .cinema-vignette{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(2,9,6,.72),rgba(2,9,6,.28) 52%,rgba(2,9,6,.04)),linear-gradient(0deg,rgba(2,9,6,.76),transparent 42%,rgba(2,9,6,.18));pointer-events:none}
+body.cinematic-active .cinema-topline,body.cinematic-active .cinema-copy,body.cinematic-active .cinema-sidecard,body.cinematic-active .cinema-scrollhint{z-index:3}
+body.cinematic-active .cinema-topline{top:112px;color:#d0dfd1}
+body.cinematic-active .cinema-copy{top:26%;left:7%;width:min(650px,55vw)}
+body.cinematic-active .cinema-copy h1{font-size:clamp(68px,8.7vw,128px);letter-spacing:-.045em;text-shadow:0 18px 70px rgba(0,0,0,.55)}
+body.cinematic-active .cinema-copy p{max-width:480px;text-shadow:0 3px 20px rgba(0,0,0,.6)}
+body.cinematic-active .cinema-sidecard{top:30%;right:5%;background:rgba(3,13,8,.66);border-color:rgba(206,255,215,.24);box-shadow:0 24px 70px rgba(0,0,0,.24);backdrop-filter:blur(18px)}
+body.cinematic-active .cinema-scrollhint{bottom:28px}
+body.cinematic-active .section-shell,body.cinematic-active .booking-strip,body.cinematic-active .venue-section,body.cinematic-active .how-section,body.cinematic-active .ecosystem-section,body.cinematic-active .partner-section{background:linear-gradient(180deg,rgba(3,12,8,.72),rgba(3,12,8,.82))!important;backdrop-filter:blur(3px)}
+body.cinematic-active .marquee-band{background:rgba(7,29,17,.78);backdrop-filter:blur(8px)}
+body.cinematic-active .booking-strip-inner{background:linear-gradient(125deg,rgba(14,48,28,.82),rgba(4,16,10,.84));backdrop-filter:blur(14px)}
+body.cinematic-active .venue-card,body.cinematic-active .step,body.cinematic-active .ecosystem-card{background:linear-gradient(145deg,rgba(13,36,23,.9),rgba(4,17,10,.91))!important;backdrop-filter:blur(12px);border-color:rgba(188,255,199,.13)}
+body.cinematic-active .partner-banner{background:linear-gradient(110deg,rgba(18,58,34,.92),rgba(5,20,12,.9))!important;backdrop-filter:blur(12px)}
+body.cinematic-active .cinema-progress{display:none}
+.tm-cinema-hud{position:fixed;z-index:24;left:24px;bottom:22px;display:flex;align-items:center;gap:13px;padding:10px 13px;border:1px solid rgba(203,255,211,.2);border-radius:999px;background:rgba(2,12,7,.72);backdrop-filter:blur(16px);color:#e7f4e8;pointer-events:auto;box-shadow:0 12px 35px rgba(0,0,0,.28)}
+.tm-cinema-hud .hud-index{color:#c6ff83;font:800 9px "DM Sans",sans-serif;letter-spacing:.15em;white-space:nowrap}
+.tm-cinema-hud .hud-scene{font:700 9px "DM Sans",sans-serif;letter-spacing:.1em;color:#d9e9dc;white-space:nowrap}
+.tm-cinema-hud .hud-track{width:74px;height:2px;background:rgba(255,255,255,.2);overflow:hidden;border-radius:4px}
+.tm-cinema-hud .hud-track span{display:block;height:100%;width:0;background:#c6ff83;box-shadow:0 0 10px #c6ff83}
+.tm-cinema-hud button{border:1px solid rgba(207,255,215,.22);border-radius:50%;width:28px;height:28px;background:rgba(255,255,255,.07);color:#f1fff2;font-size:11px;display:grid;place-items:center}
+.tm-cinema-hud button:focus-visible{outline:2px solid #c6ff83;outline-offset:3px}
+.tm-cinema-hud[hidden]{display:none}
+body.cinema-fallback .tm-photo-plate{z-index:0}
+body.cinema-fallback #turfmate-world-canvas{z-index:1;opacity:1}
+body.cinema-fallback .section-shell,body.cinema-fallback .venue-section,body.cinema-fallback .how-section,body.cinema-fallback .ecosystem-section,body.cinema-fallback .partner-section{background:rgba(3,12,8,.82)!important}
+@media(max-width:900px){body.cinematic-active .cinema-copy{left:6%;width:62vw}body.cinematic-active .cinema-sidecard{right:3%;width:235px}}
+@media(max-width:620px){
+ body.cinematic-active .cinema-section,body.cinematic-active .cinema-sticky{min-height:650px}
+ body.cinematic-active .cinema-topline{top:98px;left:20px;right:20px;font-size:7px}
+ body.cinematic-active .cinema-topline span:last-child{display:none}
+ body.cinematic-active .cinema-copy{left:22px;top:23%;width:calc(100% - 44px)}
+ body.cinematic-active .cinema-copy h1{font-size:clamp(64px,17vw,92px);line-height:.82}
+ body.cinematic-active .cinema-copy p{max-width:330px;font-size:12px}
+ body.cinematic-active .cinema-sidecard{top:auto;bottom:86px;right:18px;width:205px;padding:12px 14px}
+ body.cinematic-active .cinema-scrollhint{left:22px;transform:none;bottom:27px;font-size:7px}
+ .tm-cinema-hud{left:12px;bottom:12px;padding:7px 9px;gap:8px}
+ .tm-cinema-hud .hud-track{width:38px}
+ .tm-cinema-hud .hud-scene{max-width:104px;overflow:hidden;text-overflow:ellipsis}
+ .tm-cinema-hud .hud-index{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.cinematic-active .cinema-section{height:auto;min-height:100svh}
+ body.cinematic-active .cinema-sticky{position:relative;min-height:100svh}
+ body.cinematic-active [data-reveal]{opacity:1;transform:none;transition:none}
+ body.cinematic-active .marquee-track{animation:none}
+ .tm-photo-plate{transform:none!important}
+}

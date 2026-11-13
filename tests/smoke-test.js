@@ -12,18 +12,24 @@ assert.match(js, /function home\(/);
 assert.ok(js.includes('data-scene-section="stadium"'));
 assert.ok(js.includes('turfmate:page-rendered'));
 assert.ok(cinema.includes('new THREE.WebGLRenderer'));
+assert.ok(cinema.includes('await import(\'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js\')'));
+assert.ok(cinema.includes('const startFallback='));
+assert.ok(cinema.includes('tm-photo-plate--aerial'));
+assert.ok(cinema.includes('tm-photo-plate--action'));
 assert.ok(cinema.includes('ballPath.getPointAt'));
 assert.ok(cinema.includes("addEventListener('scroll'"));
 assert.ok(cinema.includes('prefers-reduced-motion'));
 assert.ok(css.includes('turfmate-world-canvas'));
 assert.ok(css.includes('cinematic-active'));
+assert.ok(css.includes('tm-photo-plate--aerial'));
+assert.ok(css.includes('tm-photo-plate--action'));
 assert.match(js, /function explore\(/);
 assert.match(js, /function venueModal\(/);
 assert.match(js, /function checkout\(/);
 assert.match(js, /localStorage\.setItem\('turfmate:favorites'/);
 assert.match(js, /No booking or payment was made/);
 assert.match(css, /prefers-reduced-motion/);
-for (const file of ['assets/turfmate-mark.svg', 'styles.css', 'app.js', 'cinematic.mjs']) {
+for (const file of ['assets/turfmate-mark.svg', 'assets/stadium-aerial.webp', 'assets/pitch-action.webp', 'styles.css', 'app.js', 'cinematic.mjs']) {
   assert.ok(fs.existsSync(path.join(root, file)), `Missing ${file}`);
 }
 for (const route of ['/explore', '/saved', '/bookings', '/academy', '/community', '/tournaments', '/store', '/partner']) {
