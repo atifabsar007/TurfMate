@@ -17,100 +17,24 @@ function money(v){return Number(v)>0?'৳'+Number(v).toLocaleString('en-BD'):'Pr
 function dateObj(offset){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+offset);return d}
 function dateLabel(offset){const d=dateObj(offset);return {day:d.toLocaleDateString('en-US',{weekday:'short'}),date:d.getDate(),month:d.toLocaleDateString('en-US',{month:'short'})}}
 function art(label='PITCH / DHAKA',v){return `<div class="venue-art ${v?.image?'has-photo':''}" aria-hidden="true">${v?.image?`<img src="${esc(v.image)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="art-lines"></span><span class="art-label">${esc(label)}</span><span class="venue-badge">${esc(v?.label||'TurfMate pick')}</span>${v?`<button class="favorite ${state.favorites.has(v.id)?'saved':''}" data-action="favorite" data-id="${v.id}" aria-label="${state.favorites.has(v.id)?'Remove':'Save'} ${esc(v.name)}">${state.favorites.has(v.id)?'♥':'♡'}</button>`:''}</div>`}
-function card(v){return `<article class="venue-card" data-open-venue="${v.id}">${art(v.area.toUpperCase(),v)}<div class="venue-info"><div class="venue-top"><div><h3>${esc(v.name)}</h3><div class="venue-area">⌖ ${esc(v.area)}, Dhaka</div></div><div class="rating">${v.rating?'<b>★</b> '+v.rating.toFixed(1):'<span>Rating pending</span>'}</div></div><p class="venue-description">${esc(v.description)}</p><div class="tags">${v.sports.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}${v.amenities.slice(0,1).map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div><div class="venue-bottom"><div><div class="price-label">${v.price>0?'Starting from':'Pricing'}</div><div class="price">${money(v.price)} ${v.price>0?'<small>/ 90 min</small>':''}</div></div><a class="venue-official" href="${esc(v.website)}" target="_blank" rel="noopener noreferrer">Official info ↗</a></div></div></article>`}function home(){return `
-<section class="cinema-section" id="cinematic" aria-label="TurfMate cinematic stadium-to-pitch experience">
-  <div class="cinema-sticky">
-    <div class="cinema-aerial" aria-hidden="true"></div>
-    <div class="cinema-stands" aria-hidden="true"></div>
-    <div class="cinema-pitch" aria-hidden="true"></div>
-    <div class="cinema-touchline" aria-hidden="true"></div>
-    <div class="cinema-vignette" aria-hidden="true"></div>
-    <div class="cinema-grid" aria-hidden="true"></div>
-    <div class="cinema-light light-left" aria-hidden="true"></div>
-    <div class="cinema-light light-right" aria-hidden="true"></div>
-
-    <div class="cinema-topline">
-      <span><i class="live-dot"></i> DHAKA · NIGHT GAME CULTURE</span>
-      <span data-scene-label>01 / AERIAL VIEW</span>
-    </div>
-
-    <div class="cinema-copy cinema-copy-one is-active">
-      <span class="eyebrow">THE CITY IS YOUR STADIUM</span>
-      <h1>FIND YOUR<br><em>PITCH.</em></h1>
-      <p>From the city lights to the green below. Discover real football grounds across Dhaka and get your squad ready.</p>
-      <a class="btn btn-lime" href="#/explore">Explore real venues <span>↗</span></a>
-    </div>
-
-    <div class="cinema-copy cinema-copy-two">
-      <span class="eyebrow">HEAR THE GAME. FEEL THE ENERGY.</span>
-      <h2>FEEL THE<br><em>CROWD.</em></h2>
-      <p>The camera sweeps past the stands and floodlights, bringing you closer to the atmosphere of a night match.</p>
-      <a class="text-link" href="#/explore">See Dhaka venues ↗</a>
-    </div>
-
-    <div class="cinema-copy cinema-copy-three">
-      <span class="eyebrow">FROM THE SIDELINE</span>
-      <h2>OWN THE<br><em>TOUCHLINE.</em></h2>
-      <p>Get down to pitch level. Compare the venue, check the details and choose where your next match begins.</p>
-      <a class="text-link" href="#/explore">Choose your pitch ↗</a>
-    </div>
-
-    <div class="cinema-copy cinema-copy-four">
-      <span class="eyebrow">YOUR SQUAD. YOUR 90 MINUTES.</span>
-      <h2>LET'S<br><em>KICK OFF.</em></h2>
-      <p>One ball. One pitch. Your people. Find the right turf and make game night happen.</p>
-      <a class="btn btn-lime" href="#/explore">Book your next game <span>↗</span></a>
-    </div>
-
-    <div class="cinema-ball" aria-hidden="true">
-      <svg viewBox="0 0 100 100" role="presentation">
-        <defs>
-          <radialGradient id="tm-ball-shade" cx="34%" cy="27%" r="72%">
-            <stop offset="0" stop-color="#ffffff"/>
-            <stop offset=".62" stop-color="#e9f0e8"/>
-            <stop offset="1" stop-color="#8fa394"/>
-          </radialGradient>
-          <linearGradient id="tm-ball-panel" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#25342c"/>
-            <stop offset="1" stop-color="#07120c"/>
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="47" fill="url(#tm-ball-shade)" stroke="#ffffff" stroke-opacity=".72" stroke-width="1.5"/>
-        <path d="M50 20 63 29 58 44 42 44 37 29Z" fill="url(#tm-ball-panel)"/>
-        <path d="M37 29 25 27 15 39 21 54 38 54 42 44Z" fill="url(#tm-ball-panel)"/>
-        <path d="M63 29 76 27 86 40 79 55 62 54 58 44Z" fill="url(#tm-ball-panel)"/>
-        <path d="M21 54 15 68 27 82 42 76 44 59 38 54Z" fill="url(#tm-ball-panel)"/>
-        <path d="M79 55 85 69 73 83 58 76 56 59 62 54Z" fill="url(#tm-ball-panel)"/>
-        <path d="M42 76 50 86 58 76 56 59 44 59Z" fill="url(#tm-ball-panel)"/>
-        <path d="M50 20 50 9M25 27 17 18M76 27 84 18M15 68 7 72M85 69 93 73" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2"/>
-      </svg>
-    </div>
-
-    <div class="cinema-sidecard">
-      <div class="sidecard-head"><span><i class="live-dot"></i> DHAKA VENUE RADAR</span><small>REAL PLACES</small></div>
-      <a href="https://turfnationbd.com/" target="_blank" rel="noopener noreferrer"><b>Turf Nation</b><span>Tejgaon</span><strong>↗</strong></a>
-      <a href="https://www.jaff.com.bd/" target="_blank" rel="noopener noreferrer"><b>JAFF Arena</b><span>Bashundhara R/A</span><strong>↗</strong></a>
-      <a href="https://www.google.com/maps/search/?api=1&query=DBox+Sports+Complex+Dhaka" target="_blank" rel="noopener noreferrer"><b>DBox Sports</b><span>Mirpur 12</span><strong>↗</strong></a>
-      <a href="https://www.bookcrossbar.com/" target="_blank" rel="noopener noreferrer"><b>Crossbar Metro</b><span>Uttara Sector 17</span><strong>↗</strong></a>
-    </div>
-
-    <div class="cinema-scrollhint"><span class="scroll-wheel"></span><span>SCROLL TO ENTER THE GAME</span><b>↓</b></div>
-    <div class="cinema-progress"><span></span></div>
-  </div>
-</section>
-<section class="booking-strip section-shell" data-reveal><div class="container"><div class="booking-strip-inner"><div><span class="eyebrow">YOUR NEXT MATCH STARTS HERE</span><h2>Find a slot. Bring the squad.</h2></div><form class="cinema-search" id="home-search"><label><span>AREA</span><select name="area"><option>All Dhaka</option>${areas.map(a=>`<option>${a}</option>`).join('')}</select></label><label><span>SPORT</span><select name="sport"><option>Football</option><option>Futsal</option><option>Cricket</option></select></label><label><span>DATE</span><input name="date" type="date" min="${todayISO()}" value="${state.filters.date}"></label><label><span>TIME</span><select name="time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label><button class="btn btn-lime" type="submit">Find a pitch ↗</button></form></div><div class="trust-line"><span>✦ Dhaka-first venue discovery</span><span>✦ Official venue information</span><span>✦ No fake live-slot claims</span></div></div></section>
-<section class="section-shell venue-section"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">THE LOCAL LINE-UP</div><h2>Real grounds. Real game nights.</h2><p>Explore actual Dhaka venues. Pricing and booking availability are shown only when verified by the venue.</p></div><a class="text-link" href="#/explore">Explore all venues ↗</a></div><div class="venue-grid cinematic-venue-grid">${venues.slice(0,3).map(card).join('')}</div><div class="venue-footnote">Venue names and locations are sourced from their public venue pages. Photos link to venue-owned galleries where available. Availability is not yet connected to partner calendars.</div></div></section>
-<section class="marquee-band" aria-hidden="true"><div class="marquee-track"><span>PLAY UNDER THE LIGHTS</span><b>✳</b><span>FIND YOUR PEOPLE</span><b>✳</b><span>OWN THE NIGHT</span><b>✳</b><span>PLAY UNDER THE LIGHTS</span><b>✳</b><span>FIND YOUR PEOPLE</span><b>✳</b></div></section>
-<section class="section-shell how-section" id="how-it-works"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">THE BOOKING PLAYBOOK</div><h2>Three moves to kick-off.</h2><p>No endless group chats. Just a clearer way to get everyone on the pitch.</p></div></div><div class="steps cinematic-steps"><article class="step" data-reveal><span class="step-no">01 / DISCOVER</span><div class="step-symbol">⌕</div><h3>Find your pitch</h3><p>Search by area and sport. Compare real venue information and see where each ground is located.</p></article><article class="step" data-reveal><span class="step-no">02 / CHECK</span><div class="step-symbol">◷</div><h3>Choose your time</h3><p>Check the venue’s official booking channel for the latest price and available sessions.</p></article><article class="step" data-reveal><span class="step-no">03 / PLAY</span><div class="step-symbol">⚽</div><h3>Bring the squad</h3><p>Get your team together, confirm directly with the venue and make match night happen.</p></article></div></div></section>
-<section class="section-shell ecosystem-section"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">MORE THAN A BOOKING PLATFORM</div><h2>Built around the game.</h2><p>Booking is the foundation. The wider football community is what makes TurfMate different.</p></div></div><div class="ecosystem-grid">
+function card(v){return `<article class="venue-card" data-open-venue="${v.id}">${art(v.area.toUpperCase(),v)}<div class="venue-info"><div class="venue-top"><div><h3>${esc(v.name)}</h3><div class="venue-area">⌖ ${esc(v.area)}, Dhaka</div></div><div class="rating">${v.rating?'<b>★</b> '+v.rating.toFixed(1):'<span>Rating pending</span>'}</div></div><p class="venue-description">${esc(v.description)}</p><div class="tags">${v.sports.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}${v.amenities.slice(0,1).map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div><div class="venue-bottom"><div><div class="price-label">${v.price>0?'Starting from':'Pricing'}</div><div class="price">${money(v.price)} ${v.price>0?'<small>/ 90 min</small>':''}</div></div><a class="venue-official" href="${esc(v.website)}" target="_blank" rel="noopener noreferrer">Official info ↗</a></div></div></article>`}function home(){return \`
+<section class="cinema-section" id="cinematic" aria-label="TurfMate continuous stadium journey" data-scene-section="stadium"><div class="cinema-sticky"><div class="cinema-vignette"></div>
+<div class="cinema-topline"><span><i class="live-dot"></i> DHAKA · NIGHT GAME CULTURE</span><span>SCROLL TO TRAVEL THE STADIUM</span></div>
+<div class="cinema-copy cinema-copy-one is-active"><span class="eyebrow">A NEW WAY TO EXPERIENCE THE GAME</span><h1>THE GAME<br><em>STARTS HERE.</em></h1><p>One city. Thousands of players. Your next pitch is waiting. Scroll in and travel from the stadium roof to the touchline.</p><a class="btn btn-lime" href="#/explore">Find your pitch <span>↗</span></a></div>
+<div class="cinema-sidecard"><div class="sidecard-head"><span><i class="live-dot"></i> DHAKA VENUE RADAR</span><small>REAL PLACES</small></div><a href="https://turfnationbd.com/" target="_blank" rel="noopener noreferrer"><b>Turf Nation</b><span>Tejgaon</span><strong>↗</strong></a><a href="https://www.jaff.com.bd/" target="_blank" rel="noopener noreferrer"><b>JAFF Arena</b><span>Bashundhara R/A</span><strong>↗</strong></a><a href="https://www.corexarena.com/" target="_blank" rel="noopener noreferrer"><b>Corex Arena</b><span>Mirpur 12</span><strong>↗</strong></a></div>
+<div class="cinema-scrollhint"><span class="scroll-wheel"></span><span>SCROLL · THE CAMERA FOLLOWS THE BALL</span><b>↓</b></div></div></section>
+<section class="booking-strip section-shell" data-scene-section="arrival" data-reveal><div class="container"><div class="booking-strip-inner"><div><span class="eyebrow">02 / ARRIVE AT THE PITCH</span><h2>Find a slot. Bring the squad.</h2></div><form class="cinema-search" id="home-search"><label><span>AREA</span><select name="area"><option>All Dhaka</option>\${areas.map(a=>\`<option>\${a}</option>\`).join('')}</select></label><label><span>SPORT</span><select name="sport"><option>Football</option><option>Futsal</option><option>Cricket</option></select></label><label><span>DATE</span><input name="date" type="date" min="\${todayISO()}" value="\${state.filters.date}"></label><label><span>TIME</span><select name="time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label><button class="btn btn-lime" type="submit">Find a pitch ↗</button></form></div><div class="trust-line"><span>✦ Dhaka-first venue discovery</span><span>✦ Official venue information</span><span>✦ No fake live-slot claims</span></div></div></section>
+<section class="section-shell venue-section" data-scene-section="touchline"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">03 / THE TOUCHLINE</div><h2>Real grounds. Real game nights.</h2><p>Explore actual Dhaka venues. Pricing and booking availability are shown only when verified by the venue.</p></div><a class="text-link" href="#/explore">Explore all venues ↗</a></div><div class="venue-grid cinematic-venue-grid">\${venues.slice(0,3).map(card).join('')}</div><div class="venue-footnote">Venue names and locations are sourced from their public venue pages. Availability is not yet connected to partner calendars.</div></div></section>
+<section class="marquee-band" data-scene-section="matchday" aria-hidden="true"><div class="marquee-track"><span>PLAY UNDER THE LIGHTS</span><b>✳</b><span>FIND YOUR PEOPLE</span><b>✳</b><span>OWN THE NIGHT</span><b>✳</b><span>PLAY UNDER THE LIGHTS</span><b>✳</b><span>FIND YOUR PEOPLE</span><b>✳</b></div></section>
+<section class="section-shell how-section" id="how-it-works" data-scene-section="kickoff"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">04 / KICK-OFF</div><h2>Three moves to kick-off.</h2><p>No endless group chats. Just a clearer way to get everyone on the pitch.</p></div></div><div class="steps cinematic-steps"><article class="step" data-reveal><span class="step-no">01 / DISCOVER</span><div class="step-symbol">⌕</div><h3>Find your pitch</h3><p>Search by area and sport. Compare real venue information and see where each ground is located.</p></article><article class="step" data-reveal><span class="step-no">02 / CHECK</span><div class="step-symbol">◷</div><h3>Choose your time</h3><p>Check the venue’s official booking channel for the latest price and available sessions.</p></article><article class="step" data-reveal><span class="step-no">03 / PLAY</span><div class="step-symbol">⚽</div><h3>Bring the squad</h3><p>Get your team together, confirm directly with the venue and make match night happen.</p></article></div></div></section>
+<section class="section-shell ecosystem-section" data-scene-section="community"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">05 / THE FOOTBALL COMMUNITY</div><h2>Built around the game.</h2><p>Booking is the foundation. The wider football community is what makes TurfMate different.</p></div></div><div class="ecosystem-grid">
 <article class="ecosystem-card academy-card" data-reveal><div class="ecosystem-orb">⚽</div><span class="eyebrow">TURFMATE ACADEMY</span><h3>Learn the moves.<br>Level up your game.</h3><p>Dribbling, passing, shooting and fitness paths — from first touch to match-ready.</p><a href="#/academy">Explore Academy ↗</a></article>
 <article class="ecosystem-card community-card" data-reveal><div class="ecosystem-orb">✦</div><span class="eyebrow">TURFMATE COMMUNITY</span><h3>Find your squad.<br>Find your rivals.</h3><p>Create a team, connect with nearby players and organise friendly matches.</p><a href="#/community">Meet the community ↗</a></article>
 <article class="ecosystem-card tournament-card" data-reveal><div class="ecosystem-orb">🏆</div><span class="eyebrow">TURFMATE TOURNAMENTS</span><h3>Play for something<br>bigger.</h3><p>Discover local competitions, follow fixtures and bring your team into the draw.</p><a href="#/tournaments">Explore tournaments ↗</a></article>
 <article class="ecosystem-card store-card" data-reveal><div class="ecosystem-orb">◈</div><span class="eyebrow">TURFMATE STORE</span><h3>Gear up.<br>Show up.</h3><p>Boots, jerseys, footballs and training essentials — marketplace coming later.</p><a href="#/store">Explore the store ↗</a></article>
 </div></div></section>
-<section class="section-shell partner-section"><div class="container"><div class="partner-banner" data-reveal><div><div class="eyebrow">FOR TURF OWNERS & ARENA MANAGERS</div><h2>Put your pitch<br>on the map.</h2><p>Help players discover your venue. Partner listings and booking integrations are opening in stages.</p></div><a class="btn btn-lime" href="#/partner">List your turf ↗</a></div></div></section>
-`}
-function filtered(){const f=state.filters;let list=[...venues];if(f.area!=='All Dhaka')list=list.filter(v=>v.area===f.area);if(f.sport!=='All sports')list=list.filter(v=>v.sports.includes(f.sport));if(f.time!=='Any time')list=list.filter(v=>v.times.includes(f.time));if(f.query){const q=f.query.toLowerCase();list=list.filter(v=>(v.name+' '+v.area+' '+v.sports.join(' ')).toLowerCase().includes(q))}if(f.min)list=list.filter(v=>v.price>=Number(f.min));if(f.max)list=list.filter(v=>v.price<=Number(f.max));if(f.sort==='Price: low to high')list.sort((a,b)=>a.price-b.price);if(f.sort==='Top rated')list.sort((a,b)=>b.rating-a.rating);return list}
+<section class="section-shell partner-section" data-scene-section="final-whistle"><div class="container"><div class="partner-banner" data-reveal><div><div class="eyebrow">06 / THE FINAL WHISTLE</div><h2>Put your pitch<br>on the map.</h2><p>Help players discover your venue. Partner listings and booking integrations are opening in stages.</p></div><a class="btn btn-lime" href="#/partner">List your turf ↗</a></div></div></section>
+\`}function filtered(){const f=state.filters;let list=[...venues];if(f.area!=='All Dhaka')list=list.filter(v=>v.area===f.area);if(f.sport!=='All sports')list=list.filter(v=>v.sports.includes(f.sport));if(f.time!=='Any time')list=list.filter(v=>v.times.includes(f.time));if(f.query){const q=f.query.toLowerCase();list=list.filter(v=>(v.name+' '+v.area+' '+v.sports.join(' ')).toLowerCase().includes(q))}if(f.min)list=list.filter(v=>v.price>=Number(f.min));if(f.max)list=list.filter(v=>v.price<=Number(f.max));if(f.sort==='Price: low to high')list.sort((a,b)=>a.price-b.price);if(f.sort==='Top rated')list.sort((a,b)=>b.rating-a.rating);return list}
 function explore(){const list=filtered();return `<section class="page-hero"><div class="container"><div class="eyebrow">Explore Dhaka</div><h1>Find the pitch<br>that fits your game.</h1><p>Compare sample venues by neighbourhood, sport and price. Availability shown here is illustrative, not live partner inventory.</p></div></section><div class="container explore-layout"><aside class="filters"><div class="filter-head"><strong>Refine your search</strong><button data-action="reset-filters">Reset all</button></div><div class="filter-fields"><div class="field"><label for="filter-query">Search venue or area</label><input id="filter-query" data-filter="query" value="${esc(state.filters.query)}" placeholder="Try Mirpur or football"></div><div class="field"><label for="filter-area">Area</label><select id="filter-area" data-filter="area"><option>All Dhaka</option>${areas.map(a=>`<option ${state.filters.area===a?'selected':''}>${a}</option>`).join('')}</select></div><div class="field"><label for="filter-sport">Sport</label><select id="filter-sport" data-filter="sport"><option ${state.filters.sport==='Football'?'selected':''}>Football</option><option ${state.filters.sport==='Futsal'?'selected':''}>Futsal</option><option ${state.filters.sport==='Cricket'?'selected':''}>Cricket</option><option ${state.filters.sport==='All sports'?'selected':''}>All sports</option></select></div><div class="field"><label for="filter-time">Preferred time</label><select id="filter-time" data-filter="time"><option>Any time</option><option ${state.filters.time==='Morning'?'selected':''}>Morning</option><option ${state.filters.time==='Afternoon'?'selected':''}>Afternoon</option><option ${state.filters.time==='Evening'?'selected':''}>Evening</option><option ${state.filters.time==='Night'?'selected':''}>Night</option></select></div><div class="field"><label for="filter-date">Game date</label><input id="filter-date" data-filter="date" type="date" min="${todayISO()}" value="${state.filters.date}"></div><div class="field"><label>Price range (from / session)</label><div class="range"><input data-filter="min" type="number" min="0" placeholder="Min ৳" value="${esc(state.filters.min)}"><input data-filter="max" type="number" min="0" placeholder="Max ৳" value="${esc(state.filters.max)}"></div></div><div class="field"><label for="filter-sort">Sort by</label><select id="filter-sort" data-filter="sort"><option>Recommended</option><option ${state.filters.sort==='Price: low to high'?'selected':''}>Price: low to high</option><option ${state.filters.sort==='Top rated'?'selected':''}>Top rated</option></select></div><button class="btn btn-dark filter-submit" data-action="apply-filters">Apply filters ↗</button></div></aside><section><div class="results-top"><div><h2>${list.length} sample venues</h2><p>Demo listings only · Date: ${esc(state.filters.date)}</p></div><div class="view-switch"><button class="${state.view==='list'?'active':''}" data-action="view-list">List</button><button class="${state.view==='map'?'active':''}" data-action="view-map">Map</button></div></div><div class="results-grid" style="${state.view==='map'?'display:none':''}">${list.length?list.map(card).join(''):`<div class="empty"><h3>No pitches found</h3><p>Try a different neighbourhood, time or price range.</p><button class="btn btn-outline" data-action="reset-filters">Clear filters</button></div>`}</div><div class="map-view ${state.view==='map'?'active':''}"><div class="map-canvas"><span class="map-label" style="top:12%;left:12%">DHAKA NORTH</span><span class="map-label" style="top:48%;left:54%">DHAKA CENTRAL</span><span class="map-label" style="bottom:12%;left:20%">DHAKA SOUTH</span>${mapPins(list)}</div><div class="map-results">${list.map(card).join('')}</div></div></section></div>`}
 function mapPins(list){return list.map((v)=>`<button class="map-pin" style="left:${[22,66,43,79,29,56][venues.indexOf(v)]||40}%;top:${[25,40,61,22,75,82][venues.indexOf(v)]||50}%" data-open-venue="${v.id}">${esc(v.name)}</button>`).join('')}
 function dates(){return Array.from({length:7},(_,i)=>{const d=dateLabel(i);return `<button class="date-option ${state.date===i?'selected':''}" data-action="select-date" data-index="${i}"><small>${d.day}</small><strong>${d.date}</strong><small>${d.month}</small></button>`}).join('')}
@@ -176,105 +100,7 @@ function partnerPage(){return `<section class="partner-layout container"><div cl
 function savedPage(){const list=venues.filter(v=>state.favorites.has(v.id));return `<section class="page-hero"><div class="container"><div class="eyebrow">Your shortlist</div><h1>Keep your favourite<br>pitches close.</h1><p>Saved venues stay on this device in this prototype. Sign-in and account sync will come later.</p></div></section><section class="section"><div class="container"><div class="saved-list">${list.length?list.map(card).join(''):`<div class="empty"><h3>No saved turfs yet</h3><p>Tap the heart on a venue card to keep it in your shortlist.</p><a class="btn btn-dark" href="#/explore">Explore turfs ↗</a></div>`}</div></div></section>`}
 function bookingsPage(){return `<section class="page-hero"><div class="container"><div class="eyebrow">My bookings</div><h1>Your next game,<br>all in one place.</h1><p>Confirmed reservations and gate passes will appear here after secure sign-in and booking services are connected.</p></div></section><section class="section"><div class="container"><div class="empty"><h3>No bookings yet</h3><p>This prototype does not create real reservations. Start by exploring sample venues and testing the demo booking journey.</p><a class="btn btn-dark" href="#/explore">Find a pitch ↗</a></div></div></section>`}
 function aboutPage(){return `<section class="page-hero"><div class="container"><div class="eyebrow">About TurfMate</div><h1>Made for the people<br>who love the game.</h1><p>TurfMate is a Dhaka-first sports booking concept built to make finding and reserving a football pitch less stressful.</p></div></section><section class="section"><div class="container"><div class="feature-card"><h3>Our starting point</h3><p>Players should be able to compare venues, understand schedules and reserve a pitch without calling around or travelling just to check availability. We are starting with reliable booking, then growing into a wider football ecosystem.</p></div></div></section>`}
-function initCinematicMotion(){
-  if(window.__turfmateCinemaScroll)window.removeEventListener('scroll',window.__turfmateCinemaScroll);
-  if(window.__turfmateCinemaResize)window.removeEventListener('resize',window.__turfmateCinemaResize);
-  if(window.__turfmateCinemaRaf)cancelAnimationFrame(window.__turfmateCinemaRaf);
-  window.__turfmateCinemaRaf=0;
-
-  const root=document.querySelector('.cinema-section');
-  if(root){
-    const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let target=0,current=0,activeScene=-1;
-    const clamp=(n,min=0,max=1)=>Math.max(min,Math.min(max,n));
-    const fade=(value,start,end)=>clamp((value-start)/(end-start));
-    const blend=(value,inStart,inEnd,outStart,outEnd)=>fade(value,inStart,inEnd)*(1-fade(value,outStart,outEnd));
-    const quadratic=(a,b,c,t)=>((1-t)*(1-t)*a)+(2*(1-t)*t*b)+(t*t*c);
-
-    const apply=(p)=>{
-      p=clamp(p);
-      root.style.setProperty('--scene-progress',p.toFixed(4));
-      root.style.setProperty('--stands-opacity',blend(p,.08,.28,.48,.68).toFixed(3));
-      root.style.setProperty('--pitch-opacity',blend(p,.31,.53,.72,.91).toFixed(3));
-      root.style.setProperty('--touchline-opacity',fade(p,.68,.94).toFixed(3));
-
-      const panX=(Math.sin(p*Math.PI*2)*3.8)-(p*2.2);
-      const panY=Math.sin(p*Math.PI*2.3)*1.6;
-      root.style.setProperty('--camera-pan-x',panX.toFixed(2)+'%');
-      root.style.setProperty('--camera-pan-y',panY.toFixed(2)+'%');
-      root.style.setProperty('--camera-roll',(Math.sin(p*Math.PI*2)*1.15).toFixed(2)+'deg');
-
-      const scene=Math.min(3,Math.floor(p*4));
-      if(scene!==activeScene){
-        activeScene=scene;
-        root.querySelectorAll('.cinema-copy').forEach((el,i)=>el.classList.toggle('is-active',i===scene));
-        const label=root.querySelector('[data-scene-label]');
-        if(label)label.textContent=['01 / AERIAL VIEW','02 / STANDS & LIGHTS','03 / PITCH-SIDE VIEW','04 / KICK-OFF'][scene];
-        root.dataset.scene=String(scene+1);
-      }
-
-      const scaled=p*3;
-      const segment=Math.min(2,Math.floor(scaled));
-      const t=segment===2&&p===1?1:scaled-segment;
-      const paths=[
-        {x:[12,36,51],y:[78,18,54]},
-        {x:[51,72,88],y:[54,91,43]},
-        {x:[88,70,62],y:[43,18,72]}
-      ];
-      const path=paths[segment];
-      const ballX=quadratic(path.x[0],path.x[1],path.x[2],t);
-      const ballY=quadratic(path.y[0],path.y[1],path.y[2],t);
-      root.style.setProperty('--ball-x',ballX.toFixed(2)+'%');
-      root.style.setProperty('--ball-y',ballY.toFixed(2)+'%');
-      root.style.setProperty('--ball-rotation',(p*1260).toFixed(1)+'deg');
-      root.style.setProperty('--ball-scale',(0.72+Math.sin(p*Math.PI)*0.34).toFixed(3));
-      root.style.setProperty('--ball-depth',(90+Math.sin(p*Math.PI)*190).toFixed(0)+'px');
-    };
-
-    const measure=()=>{
-      const distance=Math.max(1,root.offsetHeight-window.innerHeight);
-      target=clamp(-root.getBoundingClientRect().top/distance);
-      if(reduceMotion){current=target;apply(current);return}
-      if(!window.__turfmateCinemaRaf)window.__turfmateCinemaRaf=requestAnimationFrame(tick);
-    };
-    const tick=()=>{
-      const ease=Math.abs(target-current)>.22?.15:.085;
-      current+=(target-current)*ease;
-      if(Math.abs(target-current)<.0006)current=target;
-      apply(current);
-      if(current!==target)window.__turfmateCinemaRaf=requestAnimationFrame(tick);
-      else window.__turfmateCinemaRaf=0;
-    };
-
-    window.__turfmateCinemaScroll=measure;
-    window.__turfmateCinemaResize=measure;
-    window.addEventListener('scroll',measure,{passive:true});
-    window.addEventListener('resize',measure,{passive:true});
-    measure();
-  }
-
-  if(window.__turfmateRevealObserver)window.__turfmateRevealObserver.disconnect();
-  if('IntersectionObserver'in window){
-    window.__turfmateRevealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-        window.__turfmateRevealObserver.unobserve(entry.target);
-      }
-    }),{threshold:.12});
-    document.querySelectorAll('[data-reveal]').forEach(el=>window.__turfmateRevealObserver.observe(el));
-  }
-  document.querySelectorAll('.venue-card,.ecosystem-card').forEach(el=>{
-    el.addEventListener('pointermove',e=>{
-      const r=el.getBoundingClientRect();
-      el.style.setProperty('--tilt-x',((e.clientY-r.top)/r.height-.5)*-5+'deg');
-      el.style.setProperty('--tilt-y',((e.clientX-r.left)/r.width-.5)*5+'deg');
-    });
-    el.addEventListener('pointerleave',()=>{
-      el.style.setProperty('--tilt-x','0deg');
-      el.style.setProperty('--tilt-y','0deg');
-    });
-  });
-}
+function initCinematicMotion(){if(window.__turfmateRevealObserver)window.__turfmateRevealObserver.disconnect();if('IntersectionObserver'in window){window.__turfmateRevealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');window.__turfmateRevealObserver.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('[data-reveal]').forEach(el=>window.__turfmateRevealObserver.observe(el));}document.querySelectorAll('.venue-card,.ecosystem-card').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--tilt-x',((e.clientY-r.top)/r.height-.5)*-5+'deg');el.style.setProperty('--tilt-y',((e.clientX-r.left)/r.width-.5)*5+'deg')});el.addEventListener('pointerleave',()=>{el.style.setProperty('--tilt-x','0deg');el.style.setProperty('--tilt-y','0deg')})});window.dispatchEvent(new Event('turfmate:page-rendered'));}
 function render(){const route=(location.hash.replace(/^#/,'')||'/').split('?')[0];document.body.classList.add('cinema-theme');document.body.classList.toggle('tournament-theme',route==='/tournaments');document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',route==='/'+a.dataset.nav));$('#mobile-nav').classList.remove('open');$('.menu-toggle')?.setAttribute('aria-expanded','false');if(route==='/')app.innerHTML=home();else if(route==='/explore')app.innerHTML=explore();else if(route==='/saved')app.innerHTML=savedPage();else if(route==='/bookings')app.innerHTML=bookingsPage();else if(route==='/tournaments')app.innerHTML=tournamentsPage();else if(route==='/academy'||route==='/community'||route==='/store')app.innerHTML=featurePage(route.slice(1));else if(route==='/partner')app.innerHTML=partnerPage();else if(route==='/about')app.innerHTML=aboutPage();else if(route==='/how-it-works'){app.innerHTML=home();setTimeout(()=>$('#how-it-works')?.scrollIntoView({behavior:'smooth'}),20)}else if(route==='/privacy'||route==='/terms')app.innerHTML=`<section class="page-hero"><div class="container"><div class="eyebrow">Before launch</div><h1>${route==='/privacy'?'Privacy':'Terms'} information</h1><p>Formal policies will be published and reviewed before public launch.</p></div></section>`;else app.innerHTML=`<section class="section"><div class="container"><div class="empty"><h3>That page is out of bounds.</h3><a class="btn btn-dark" href="#/">Back home</a></div></div></section>`;window.scrollTo({top:0,behavior:'auto'});initCinematicMotion();}
 function toast(message){const el=document.createElement('div');el.className='toast';el.textContent=message;$('#toast-region').append(el);setTimeout(()=>el.remove(),3200)}
 function refreshModal(){const v=venues.find(x=>x.id===state.venue);if(v)modal.innerHTML=venueModal(v)}
