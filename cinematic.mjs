@@ -1,20 +1,68 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
-
 (async function startTurfMateCinema(){
+(async function startTurfMateCinema(){
+  if(document.readyState==='loading')await new Promise(resolve=>document.addEventListener('DOMContentLoaded',resolve,{once:true}));
   const app=document.querySelector('#app');
+  if(!app)return;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)');
   const mobile=matchMedia('(max-width: 700px)');
+  const photoA=document.createElement('div');photoA.className='tm-photo-plate tm-photo-plate--aerial';photoA.setAttribute('aria-hidden','true');
+  const photoB=document.createElement('div');photoB.className='tm-photo-plate tm-photo-plate--action';photoB.setAttribute('aria-hidden','true');
+  document.body.prepend(photoA,photoB);
+  const startFallback=(error)=>{
+    document.body.classList.add('cinema-fallback');
+    const old=document.querySelector('#turfmate-world-canvas');if(old)old.remove();
+    const canvas=document.createElement('canvas');canvas.id='turfmate-world-canvas';canvas.setAttribute('aria-hidden','true');document.body.prepend(canvas);
+    const ctx=canvas.getContext('2d');if(!ctx){console.warn('Canvas fallback unavailable.',error);return;}
+    let w=innerWidth,h=innerHeight,dpr=1,p=0,active=false,paused=false,chapter=-1;
+    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t)};
+    const scenes=[[0,'STADIUM APPROACH'],[.12,'DESCEND INTO THE BOWL'],[.25,'ENTER THE PITCH'],[.4,'FOLLOW THE FOOTBALL'],[.6,'CROSS THE FIELD'],[.78,'MATCHDAY COMMUNITY'],[.92,'THE FINAL WHISTLE']];
+    const hud=document.createElement('div');hud.className='tm-cinema-hud';hud.hidden=true;hud.innerHTML='<span class="hud-index">01 / 07</span><span class="hud-scene">STADIUM APPROACH</span><span class="hud-track"><span></span></span><button type="button" aria-label="Pause ball motion">Ⅱ</button>';document.body.appendChild(hud);
+    const idx=hud.querySelector('.hud-index'),label=hud.querySelector('.hud-scene'),bar=hud.querySelector('.hud-track span'),toggle=hud.querySelector('button');
+    toggle.addEventListener('click',()=>{paused=!paused;toggle.textContent=paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',paused?'Resume ball motion':'Pause ball motion');});
+    const aerial=new Image(),action=new Image();aerial.src='assets/stadium-aerial.webp';action.src='assets/pitch-action.webp';
+    function resize(){w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,mobile.matches?1.25:1.6);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
+    function update(){
+      const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);p=reduce.matches?0:clamp(scrollY/max,0,1);
+      let c=0;for(let i=0;i<scenes.length;i++)if(p>=scenes[i][0])c=i;
+      if(c!==chapter){chapter=c;idx.textContent=String(c+1).padStart(2,'0')+' / 07';label.textContent=scenes[c][1];}
+      bar.style.width=(p*100)+'%';
+      photoA.style.opacity=String(clamp(1-smooth((p-.12)/.22)+smooth((p-.82)/.18),0,1));
+      photoB.style.opacity=String(clamp(smooth((p-.12)/.2)*(1-smooth((p-.78)/.18)),0,1));
+      photoA.style.transform='scale('+(1+p*1.65)+') translate3d('+(-p*3)+'%, '+(p*2)+'%, 0)';
+      photoB.style.transform='scale('+(1+Math.max(0,p-.12)*1.5)+') translate3d('+(-p*2)+'%, '+(p*1.5)+'%, 0)';
+    }
+    function routeSync(){active=!!app.querySelector('.cinema-section');document.body.classList.toggle('cinematic-active',active);hud.hidden=!active;photoA.style.display=active?'block':'none';photoB.style.display=active?'block':'none';canvas.style.display=active?'block':'none';if(active)update();}
+    addEventListener('scroll',update,{passive:true});addEventListener('resize',()=>{resize();update();},{passive:true});addEventListener('turfmate:page-rendered',routeSync);new MutationObserver(routeSync).observe(app,{childList:true});routeSync();resize();
+    function drawBall(x,y,r,angle){
+      ctx.save();ctx.shadowColor='rgba(0,0,0,.65)';ctx.shadowBlur=r*.6;ctx.shadowOffsetY=r*.3;
+      const g=ctx.createRadialGradient(x-r*.35,y-r*.4,r*.05,x,y,r);g.addColorStop(0,'#fff');g.addColorStop(.7,'#e8eee5');g.addColorStop(1,'#79877c');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.shadowColor='transparent';
+      ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.beginPath();ctx.arc(0,0,r*.92,0,Math.PI*2);ctx.clip();
+      for(let i=0;i<5;i++){const a=i*Math.PI*2/5;ctx.beginPath();for(let k=0;k<5;k++){const t=a+k*Math.PI*2/5,px=Math.cos(t)*r*.29,py=Math.sin(t)*r*.29;k?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();ctx.fillStyle='#101a13';ctx.fill();}
+      ctx.restore();ctx.restore();
+    }
+    function draw(now){
+      requestAnimationFrame(draw);if(!active||document.hidden)return;ctx.clearRect(0,0,w,h);
+      const img=p<.2?aerial:(p<.88?action:aerial);
+      if(img.complete&&img.naturalWidth){const z=p<.2?1+p*1.8:(p<.88?1+(p-.2)*1.05:1.35),scale=Math.max(w/img.width,h/img.height)*z,dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,(w-dw)/2-Math.sin(p*5)*w*.04,(h-dh)/2+p*h*.035,dw,dh);}
+      const shade=ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'rgba(2,10,6,.28)');shade.addColorStop(.5,'rgba(2,10,6,.02)');shade.addColorStop(1,'rgba(2,10,6,.55)');ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
+      const q=smooth((p-.15)/.82),x=w*(.5+Math.sin(q*Math.PI*3.2)*.3),y=h*(.62+Math.sin(q*Math.PI*6.4)*.11),radius=clamp(Math.min(w,h)*(.028+(1-q)*.018),17,54);
+      if(p>.13&&p<.98){ctx.strokeStyle='rgba(198,255,131,.35)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-radius*2.7,y+radius*.8);ctx.quadraticCurveTo(x-radius*1.5,y+radius*1.6,x-radius*.8,y+radius*.3);ctx.stroke();drawBall(x,y,radius,paused||reduce.matches?0:q*16+now*.0008);}
+    }
+    canvas.style.opacity='1';requestAnimationFrame(draw);console.warn('TurfMate is using the photo-and-football fallback because WebGL/Three.js could not initialise.',error);
+  };
+  let THREE;
+  try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');}
+  catch(error){startFallback(error);return;}
   const canvas=document.createElement('canvas');
   canvas.id='turfmate-world-canvas';
   canvas.setAttribute('aria-hidden','true');
   document.body.prepend(canvas);
   let renderer;
   try{
-    renderer=new THREE.WebGLRenderer({canvas,antialias:!mobile.matches,powerPreference:'high-performance'});
+    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!mobile.matches,powerPreference:'high-performance'});
   }catch(error){
-    canvas.remove();
-    document.body.classList.add('cinema-fallback');
-    console.warn('TurfMate 3D unavailable; using the visual fallback.',error);
+    startFallback(error);
     return;
   }
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile.matches?1.1:1.5));
@@ -25,7 +73,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
   renderer.shadowMap.enabled=!mobile.matches;
 
   const scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x030906);
+  scene.background=null;
+  renderer.setClearColor(0x000000,0);
   scene.fog=new THREE.FogExp2(0x06100a,.0023);
   const camera=new THREE.PerspectiveCamera(52,innerWidth/innerHeight,.1,700);
   camera.position.set(0,112,160);
@@ -141,12 +190,25 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
   const idx=hud.querySelector('.hud-index'),label=hud.querySelector('.hud-scene'),bar=hud.querySelector('.hud-track span'),toggle=hud.querySelector('button');
   toggle.addEventListener('click',()=>{paused=!paused;toggle.textContent=paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',paused?'Resume ambient motion':'Pause ambient motion');});
   const chapters=[[0,'STADIUM APPROACH'],[.13,'ENTER THE BOWL'],[.25,'DROP TO THE TOUCHLINE'],[.4,'FOLLOW THE FOOTBALL'],[.6,'TRAVEL THE PITCH'],[.78,'MATCHDAY COMMUNITY'],[.91,'THE FINAL WHISTLE']];
+  function updatePhotoPlates(){
+    photoA.style.opacity=String(1-smooth((progress-.04)/.22));
+    photoB.style.opacity=String(clamp(smooth((progress-.1)/.2)*(1-smooth((progress-.32)/.16)),0,1));
+    photoA.style.transform='scale('+(1+progress*1.75)+') translate3d('+(-progress*3.5)+'%, '+(progress*2)+'%, 0)';
+    photoB.style.transform='scale('+(1+Math.max(0,progress-.1)*1.65)+') translate3d('+(-progress*2)+'%, '+(progress*1.5)+'%, 0)';
+  }
   function readScroll(){
     const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);progress=reduce.matches?0:clamp(scrollY/max,0,1);bar.style.width=(progress*100)+'%';
     let c=0;for(let i=0;i<chapters.length;i++)if(progress>=chapters[i][0])c=i;
     if(c!==chapter){chapter=c;idx.textContent=String(c+1).padStart(2,'0')+' / 07';label.textContent=chapters[c][1];}
+    updatePhotoPlates();
   }
-  function routeSync(){active=!!app?.querySelector('.cinema-section');document.body.classList.toggle('cinematic-active',active);hud.hidden=!active;canvas.style.display=active?'block':'none';if(active)readScroll();}
+  function routeSync(){
+    active=!!app.querySelector('.cinema-section');
+    document.body.classList.toggle('cinematic-active',active);hud.hidden=!active;
+    photoA.style.display=active?'block':'none';photoB.style.display=active?'block':'none';
+    const liveCanvas=document.querySelector('#turfmate-world-canvas');if(liveCanvas)liveCanvas.style.display=active?'block':'none';
+    if(active)readScroll();
+  }
   addEventListener('scroll',readScroll,{passive:true});
   addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile.matches?1.1:1.5));renderer.setSize(innerWidth,innerHeight,false);readScroll();},{passive:true});
   addEventListener('turfmate:page-rendered',routeSync);new MutationObserver(routeSync).observe(app,{childList:true});routeSync();
@@ -160,7 +222,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
     else if(p<.23){const t=smooth(p/.23);pos=entryCam.getPointAt(t);target=entryLook.getPointAt(t);}
     else if(p<.87){pos=bp.clone().addScaledVector(tan,-9).add(new THREE.Vector3(0,3.9,0));target=bp.clone().addScaledVector(tan,7).add(new THREE.Vector3(0,.25,0));}
     else{const t=smooth((p-.87)/.13);pos=exitCam.getPointAt(t);target=new THREE.Vector3(0,0,0);}
-    camera.position.lerp(pos,reduce.matches?.08:.065);look.lerp(target,reduce.matches?.08:.075);camera.lookAt(look);renderer.render(scene,camera);
+    camera.position.lerp(pos,reduce.matches ? .08 : .065);look.lerp(target,reduce.matches ? .08 : .075);camera.lookAt(look);canvas.style.opacity=String(reduce.matches?1:smooth((p-.015)/.12));renderer.render(scene,camera);
   }
   requestAnimationFrame(animate);
   if(reduce.addEventListener)reduce.addEventListener('change',readScroll);
