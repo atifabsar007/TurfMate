@@ -23,7 +23,7 @@
     function update(){
       const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);p=reduce.matches?0:clamp(scrollY/max,0,1);
       let c=0;for(let i=0;i<scenes.length;i++)if(p>=scenes[i][0])c=i;
-      if(c!==chapter){chapter=c;idx.textContent=String(c+1).padStart(2,'0')+' / 08';label.textContent=scenes[c][1];}
+      if(c!==chapter){chapter=c;idx.textContent=String(c+1).padStart(2,'0')+' / 08';label.textContent=scenes[c][1];}document.body.dataset.turfStage=String(c);
       bar.style.width=(p*100)+'%';
       photoA.style.opacity=String(clamp(1-smooth((p-.12)/.22)+smooth((p-.82)/.18),0,1));
       photoB.style.opacity=String(clamp(smooth((p-.12)/.2)*(1-smooth((p-.78)/.18)),0,1));
