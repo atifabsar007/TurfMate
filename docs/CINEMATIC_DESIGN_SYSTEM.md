@@ -46,10 +46,16 @@ The scene progress is tied to the entire homepage scroll range, including the fo
 - Existing static HTML/CSS/JavaScript and GitHub Pages deployment are retained.
 - Three.js is loaded dynamically so a CDN or WebGL failure does not stop the rest of the experience.
 - A persistent transparent WebGL canvas renders the procedural stadium, instanced crowd, pitch markings, goals, floodlights, city silhouettes and a textured football.
-- The aerial and pitch-action photo plates are cropped from the project owner's supplied TurfMate visual references and crossfade as the camera descends. The opening now begins at a much higher aerial angle and dives almost vertically toward the field before handing off to the ball-follow camera. The camera lens tightens during the descent.
+- The aerial photo plate now uses a free-to-use Pexels aerial football-stadium photograph by David Pickup (https://www.pexels.com/photo/aerial-view-of-a-football-stadium-29070371/). The pitch-action plate remains the TurfMate project asset. Both crossfade as the camera descends; the 3D renderer and green fallback color remain visible if the external photo cannot load. The opening now begins at a much higher aerial angle and dives almost vertically toward the field before handing off to the ball-follow camera. The camera lens tightens during the descent.
 - A 2D canvas fallback uses the same supplied image plates and a moving football if WebGL is unavailable.
 - Reduced-motion preferences are respected; the site remains readable and usable without camera travel.
 - The cinematic canvas is layered behind semantic HTML; navigation, booking controls and venue cards remain interactive.
+
+## Player account and form behaviour
+- Login and registration are separate routes (`#/login` and `#/register`).
+- The static prototype stores a local player profile in browser storage and derives a PBKDF2-SHA-256 password hash with a per-account salt; it never stores the password itself.
+- Booking enquiries, tournament interest and partner interest are local demo records. They are not transmitted to venues or organisers and do not create reservations.
+- A production release still needs a server-side identity provider, account recovery, server-side form validation, a booking API and verified partner calendars.
 
 ## Honest limitations
 The photo plates are still images animated with camera-style zoom and parallax, not recorded video. The main scene is real-time procedural 3D, not a photorealistic scanned stadium. A later production pass can replace procedural stands and lighting with optimized, licensed stadium models, higher-resolution textures, player rigs and real football motion capture.
