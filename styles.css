@@ -50,3 +50,131 @@ body.tournament-theme{background:#06130f;color:#edf7ef}
 @media(max-width:900px){.tournament-hero-inner{grid-template-columns:1fr;gap:10px}.tournament-copy{max-width:720px}.tournament-feature{height:300px}.tournament-metrics{grid-template-columns:repeat(2,1fr);row-gap:18px}.tournament-metrics>div:nth-child(3){padding-left:0;border:0}.tournament-grid{grid-template-columns:repeat(2,1fr)}.tournament-fixtures-layout{grid-template-columns:1fr;gap:28px}}
 @media(max-width:620px){.tournament-hero{padding:48px 0 28px}.tournament-copy h1{font-size:43px;letter-spacing:-2.4px}.tournament-copy>p{font-size:12px}.tournament-actions{gap:14px;flex-wrap:wrap}.tournament-proof{gap:10px 16px}.tournament-feature{height:260px}.trophy-stage{width:80%;height:78%}.feature-chip{padding:8px 10px}.feature-chip small{display:none}.chip-top{right:-4px}.chip-bottom{left:-4px}.tournament-metrics{gap:14px 7px}.tournament-metrics>div{padding-left:12px}.tournament-metrics strong{font-size:15px}.tournament-metrics span{font-size:9px}.tournament-list-section,.tournament-fixtures-section,.tournament-steps-section{padding:55px 0}.tournament-heading{align-items:flex-start;flex-direction:column}.tournament-grid,.tournament-steps{grid-template-columns:1fr}.tournament-art{height:165px}.tournament-fixtures-layout{gap:20px}.fixture-board{padding:16px 13px}.fixture-teams{grid-template-columns:1fr 34px 1fr}.fixture-teams strong{font-size:10px}.fixture-board-foot{font-size:8px}.tournament-bottom-inner{align-items:flex-start;flex-direction:column}.tournament-bottom:after{right:-20px;font-size:110px}.tournament-theme .header-inner{width:calc(100% - 30px)}}
 @media(prefers-reduced-motion:reduce){.tournament-page *,.tournament-page *:before,.tournament-page *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TURFMATE v0.3 — NIGHT MATCH / CINEMATIC SCROLL SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+:root{--night:#050d0a;--night-2:#081711;--panel:#0d2118;--panel-2:#10291e;--line:rgba(175,255,197,.14);--lime:#baff55;--mint:#70f0ac;--gold:#ffbd55;--paper:#eff8f0;--muted:#9bb0a1}
+html{scroll-behavior:smooth;scroll-padding-top:90px;background:var(--night)}
+body.cinema-theme{background:var(--night);color:var(--paper);font-family:'DM Sans',sans-serif}
+.cinema-theme .notice{background:#081b12;color:#a9c4b2;border-color:var(--line)}
+.cinema-theme .header{background:rgba(4,13,9,.82);border-color:var(--line);backdrop-filter:blur(22px);box-shadow:0 12px 42px rgba(0,0,0,.22)}
+.cinema-theme .brand{color:#f2fff3}.cinema-theme .brand-light{color:#83d9a5}.cinema-theme .desktop-nav a,.cinema-theme .owner-link{color:#a7bdad}
+.cinema-theme .desktop-nav a:hover,.cinema-theme .desktop-nav a.active,.cinema-theme .owner-link:hover{color:var(--lime)}
+.cinema-theme .btn-dark{background:var(--lime);color:#08130d}.cinema-theme .btn-dark:hover{background:#d0ff83}
+.cinema-theme .mobile-nav{background:#081711;border-color:var(--line)}.cinema-theme .mobile-nav a,.cinema-theme .mobile-nav button{color:#eaf8ec;background:transparent}
+.cinema-theme .footer{background:#06110c;color:#e6f4e9;border-top:1px solid var(--line)}.cinema-theme .footer h4{color:#e9f8eb}.cinema-theme .footer p,.cinema-theme .footer a{color:#92aa99}.cinema-theme .footer-bottom{border-color:var(--line);color:#708b78}
+.cinema-theme .section-white,.cinema-theme .page-hero,.cinema-theme .filters,.cinema-theme .form-card,.cinema-theme .feature-card{background:var(--night-2)!important;color:var(--paper)!important}
+.cinema-theme .section-heading h2,.cinema-theme .page-hero h1,.cinema-theme .partner-copy h2{color:var(--paper)}
+.cinema-theme .section-heading p,.cinema-theme .page-hero p,.cinema-theme .muted{color:var(--muted)}
+.cinema-theme .venue-card,.cinema-theme .step,.cinema-theme .ecosystem-card,.cinema-theme .area-card,.cinema-theme .form-card,.cinema-theme .filters,.cinema-theme .empty{background:linear-gradient(145deg,#10271c,#09170f)!important;border-color:var(--line)!important;color:var(--paper)!important;box-shadow:0 20px 55px rgba(0,0,0,.2)}
+.cinema-theme .venue-card h3,.cinema-theme .step h3,.cinema-theme .ecosystem-card h3,.cinema-theme .area-card strong{color:#f0fff2}
+.cinema-theme .venue-area,.cinema-theme .venue-description,.cinema-theme .step p,.cinema-theme .ecosystem-card p,.cinema-theme .area-card small{color:#9db4a3}
+.cinema-theme input,.cinema-theme select,.cinema-theme textarea{background:#0a1c13!important;border-color:rgba(183,255,197,.2)!important;color:#effff1!important}
+.cinema-theme input::placeholder,.cinema-theme textarea::placeholder{color:#78917f}
+.cinema-theme .tag{background:rgba(145,255,166,.09);color:#a9e5b7;border-color:rgba(145,255,166,.13)}
+.cinema-theme .text-link{color:var(--lime)}
+.cinema-theme .partner-banner{background:linear-gradient(110deg,#123b27,#0a1b12 70%)!important;border-color:var(--line)!important;color:var(--paper)}
+.cinema-theme .partner-banner h2{color:#f3fff4}.cinema-theme .partner-banner p{color:#a2b8a8}
+.eyebrow{color:var(--lime)!important;letter-spacing:.2em;font-size:10px;font-weight:900}
+.btn-lime{display:inline-flex;align-items:center;gap:16px;background:var(--lime);color:#08140c;border-radius:999px;padding:15px 23px;font-size:12px;font-weight:900;box-shadow:0 0 34px rgba(186,255,85,.16);transition:transform .25s,box-shadow .25s,background .25s}
+.btn-lime:hover{transform:translateY(-3px);background:#d0ff83;box-shadow:0 0 42px rgba(186,255,85,.3)}
+.cinema-section{height:285vh;position:relative;background:#020805;--scene-progress:0;isolation:isolate}
+.cinema-sticky{height:100svh;min-height:640px;position:sticky;top:0;overflow:hidden;isolation:isolate;background:#04100a}
+.cinema-aerial,.cinema-pitch,.cinema-vignette,.cinema-grid{position:absolute;inset:0;pointer-events:none}
+.cinema-aerial{z-index:-4;background-image:url('https://www.experiencze.eu/sites/experiencze.eu/files/experiences/fc-viktoria-pilsen-football-game-1.jpg');background-size:cover;background-position:center 48%;transform:scale(calc(1 + var(--scene-progress)*1.18)) translate3d(0,calc(var(--scene-progress)*-3%),0);filter:saturate(.8) contrast(1.08) brightness(.68);will-change:transform}
+.cinema-pitch{z-index:-3;background-image:url('https://turfnationbd.com/_next/image?q=75&url=%2F_next%2Fstatic%2Fmedia%2F3.2abd2619.jpg&w=3840');background-size:cover;background-position:center;opacity:clamp(0,calc((var(--scene-progress) - .16)*1.55),.9);transform:scale(calc(.84 + var(--scene-progress)*.46)) translateY(calc(8% - var(--scene-progress)*8%));filter:saturate(1.1) contrast(1.12) brightness(.62);will-change:transform,opacity}
+.cinema-vignette{z-index:-2;background:linear-gradient(90deg,rgba(2,10,6,.9),rgba(3,12,7,.55) 46%,rgba(2,9,6,.2)),linear-gradient(0deg,#04110b 0%,transparent 40%,rgba(0,0,0,.35) 100%);mix-blend-mode:multiply}
+.cinema-grid{z-index:-1;opacity:.13;background-image:linear-gradient(rgba(180,255,190,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(180,255,190,.14) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(90deg,#000,transparent 95%)}
+.cinema-light{position:absolute;z-index:0;top:-25%;width:20vw;height:90vh;opacity:.18;filter:blur(40px);background:linear-gradient(180deg,rgba(226,255,230,.6),transparent 75%);transform-origin:top;pointer-events:none}
+.light-left{left:5%;transform:rotate(23deg)}.light-right{right:4%;transform:rotate(-25deg);opacity:.12}
+.cinema-topline{position:absolute;top:122px;left:4.5%;right:4.5%;display:flex;justify-content:space-between;color:#b6c9ba;font-size:9px;font-weight:900;letter-spacing:.2em}
+.cinema-topline span:first-child{display:flex;align-items:center;gap:10px}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px rgba(186,255,85,.1),0 0 18px var(--lime);animation:tm-pulse 1.9s infinite}
+.cinema-copy{position:absolute;left:8%;top:25%;width:min(600px,56vw);opacity:0;transform:translate3d(0,35px,0) scale(.97);transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.cinema-copy.is-active{opacity:1;transform:translate3d(0,0,0) scale(1);pointer-events:auto}
+.cinema-copy .eyebrow{display:block;margin-bottom:22px;color:#d2ff8a!important}
+.cinema-copy h1,.cinema-copy h2{font-family:'Barlow Condensed','Manrope',sans-serif;font-size:clamp(66px,9vw,132px);line-height:.78;letter-spacing:-.035em;font-weight:900;margin:0 0 26px;color:#f5fff4;text-shadow:0 14px 60px rgba(0,0,0,.35)}
+.cinema-copy h2{font-size:clamp(54px,7.5vw,106px)}
+.cinema-copy h1 em,.cinema-copy h2 em{font-style:normal;color:var(--lime)}
+.cinema-copy p{max-width:445px;color:#c1d2c5;font-size:15px;line-height:1.85;margin:0 0 28px}
+.cinema-copy .text-link{display:inline-block;margin-top:7px;color:var(--lime);font-weight:800}
+.cinema-ball{position:absolute;z-index:3;left:calc(12% + var(--scene-progress)*74%);top:calc(77% - var(--scene-progress)*37%);font-size:clamp(35px,5vw,70px);filter:drop-shadow(0 15px 18px rgba(0,0,0,.6));transform:translate(-50%,-50%) rotate(calc(var(--scene-progress)*1050deg)) scale(calc(.7 + var(--scene-progress)*.55));transition:filter .3s;will-change:left,top,transform}
+.cinema-sidecard{position:absolute;right:5%;top:31%;width:290px;padding:18px 20px;border:1px solid rgba(190,255,204,.2);border-radius:20px;background:rgba(3,16,10,.7);backdrop-filter:blur(18px);box-shadow:0 22px 70px rgba(0,0,0,.34);opacity:calc(1 - var(--scene-progress)*1.4);transform:translateX(calc(var(--scene-progress)*80px));pointer-events:auto}
+.sidecard-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:9px;font-weight:900;letter-spacing:.13em;color:#eaffed}
+.sidecard-head>span{display:flex;align-items:center;gap:9px}.sidecard-head small{color:var(--lime);font-size:8px}
+.cinema-sidecard>a{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:13px 0;border-bottom:1px solid rgba(190,255,204,.1);color:#effff1}
+.cinema-sidecard>a:last-child{border:0;padding-bottom:0}.cinema-sidecard>a b{font-size:12px}.cinema-sidecard>a span{font-size:10px;color:#91aa99}.cinema-sidecard>a strong{grid-column:2;grid-row:1/3;align-self:center;color:var(--lime)}
+.cinema-scrollhint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;color:#a8bead;font-size:8px;font-weight:900;letter-spacing:.22em;white-space:nowrap}
+.cinema-scrollhint b{color:var(--lime);font-size:16px;animation:scroll-bob 1.3s infinite}
+.scroll-wheel{height:23px;width:14px;border:1px solid rgba(226,255,232,.55);border-radius:99px;position:relative}.scroll-wheel:after{content:"";position:absolute;left:5px;top:4px;width:2px;height:5px;border-radius:3px;background:var(--lime);animation:wheel-scroll 1.5s infinite}
+.cinema-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.12)}.cinema-progress span{display:block;width:calc(var(--scene-progress)*100%);height:100%;background:var(--lime);box-shadow:0 0 14px var(--lime)}
+.section-shell{position:relative;padding:90px 0;background:var(--night);color:var(--paper);overflow:hidden}
+.booking-strip{padding:35px 0 30px;background:linear-gradient(180deg,#06110c,#081911)}
+.booking-strip-inner{padding:26px 28px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(125deg,rgba(16,55,34,.82),rgba(7,24,15,.92));box-shadow:0 24px 70px rgba(0,0,0,.24)}
+.booking-strip h2{font:800 clamp(25px,3vw,37px) Manrope;margin:10px 0 22px;letter-spacing:-1.3px}
+.cinema-search{display:grid;grid-template-columns:1.2fr .8fr 1fr .8fr auto;gap:10px;align-items:end}
+.cinema-search label{display:grid;gap:7px;min-width:0}.cinema-search label span{font-size:8px;color:#94ae9d;font-weight:900;letter-spacing:.16em}
+.cinema-search select,.cinema-search input{width:100%;height:47px;border:1px solid var(--line);border-radius:12px;padding:0 12px;background:#08180f;color:#f2fff3;font:600 11px 'DM Sans'}
+.cinema-search .btn{height:47px;white-space:nowrap}
+.trust-line{display:flex;gap:24px;flex-wrap:wrap;margin:17px 2px 0;color:#829c8a;font-size:9px}.trust-line span:first-child{color:#b6d7bd}
+.venue-section{padding-top:75px;background:radial-gradient(ellipse at 80% 20%,rgba(40,125,67,.1),transparent 38%),#050e0a}
+.venue-section .section-heading h2,.how-section .section-heading h2,.ecosystem-section .section-heading h2{font:900 clamp(37px,5vw,62px)/.98 'Barlow Condensed',Manrope,sans-serif;letter-spacing:-.015em;text-transform:uppercase}
+.cinematic-venue-grid .venue-card{overflow:hidden;border-radius:20px;background:#0b1d14;border:1px solid var(--line);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s,border-color .3s;transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg))}
+.venue-card:hover{transform:perspective(900px) translateY(-9px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));border-color:rgba(186,255,85,.4);box-shadow:0 28px 75px rgba(0,0,0,.35),0 0 26px rgba(186,255,85,.08)}
+.venue-art{height:220px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 110%,#1d7544,#0b2718 60%,#07140d);isolation:isolate}
+.venue-art:before{content:"";position:absolute;inset:18px 9%;border:1px solid rgba(225,255,231,.4);transform:perspective(450px) rotateX(16deg);z-index:1}
+.venue-art:after{content:"";position:absolute;left:50%;top:50%;width:68px;height:68px;border:1px solid rgba(225,255,231,.34);border-radius:50%;transform:translate(-50%,-50%);z-index:1}
+.venue-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.68) saturate(.86);transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .5s;z-index:0}
+.venue-card:hover .venue-art img{transform:scale(1.12);filter:brightness(.85) saturate(1.1)}
+.art-lines{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,9,5,.05),rgba(1,9,5,.48));z-index:1}
+.art-label{position:absolute;left:18px;bottom:17px;color:#effff1;font-size:9px;font-weight:900;letter-spacing:.2em;z-index:2}
+.venue-badge{position:absolute;left:17px;top:16px;border:1px solid rgba(220,255,224,.25);border-radius:99px;background:rgba(4,17,10,.7);padding:7px 10px;color:#d5ff9b;font-size:8px;font-weight:900;z-index:2}
+.favorite{position:absolute;right:15px;top:13px;z-index:3;background:rgba(2,12,7,.72);border:1px solid rgba(220,255,224,.22);color:#fff;border-radius:50%;width:35px;height:35px;font-size:19px}
+.favorite.saved{color:#ff8291}.venue-info{padding:19px}.venue-top h3{font:800 18px Manrope;letter-spacing:-.6px}.rating{color:#baff75;font-size:10px}.rating span{color:#7f9b88;font-size:9px}
+.venue-description{min-height:54px;margin:12px 0;color:#91a999;font-size:10px;line-height:1.65}
+.venue-bottom{border-top:1px solid var(--line);padding-top:14px;margin-top:16px;display:flex;justify-content:space-between;align-items:end;gap:10px}
+.price-label{color:#809887;font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.price{font:800 17px Manrope;color:#eaffeb}.price small{font:500 9px 'DM Sans';color:#8ba493}
+.venue-official{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(186,255,85,.28);border-radius:99px;padding:9px 11px;color:var(--lime);font-size:9px;font-weight:800;white-space:nowrap}
+.venue-footnote{margin-top:18px;color:#6f8978;font-size:9px;line-height:1.7}
+.marquee-band{overflow:hidden;border-block:1px solid rgba(186,255,85,.18);background:#0b2116;padding:17px 0}
+.marquee-track{display:flex;align-items:center;justify-content:space-around;gap:32px;min-width:max-content;animation:marquee-run 28s linear infinite;color:#d8f7dd;font:900 16px 'Barlow Condensed',sans-serif;letter-spacing:.18em}
+.marquee-track b{color:var(--lime);font-size:20px}
+.how-section{background:radial-gradient(ellipse at 10% 30%,rgba(26,109,59,.14),transparent 36%),#06110c}
+.cinematic-steps{gap:16px}.cinematic-steps .step{min-height:245px;padding:27px;border-radius:20px;background:linear-gradient(145deg,#10271b,#09170f);border:1px solid var(--line);transition:transform .35s,border-color .35s}
+.cinematic-steps .step:hover{transform:translateY(-8px);border-color:rgba(186,255,85,.35)}
+.step-symbol{font-size:31px;color:var(--lime);margin:25px 0 12px;filter:drop-shadow(0 0 12px rgba(186,255,85,.18))}
+.ecosystem-section{background:#050d09}.ecosystem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}
+.ecosystem-grid .ecosystem-card{position:relative;min-height:260px;padding:30px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(140deg,#112b1d,#091710);transition:transform .4s,border-color .4s,box-shadow .4s}
+.ecosystem-grid .ecosystem-card:hover{transform:translateY(-7px);border-color:rgba(186,255,85,.35);box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.ecosystem-orb{position:absolute;right:25px;top:12px;font-size:88px;color:rgba(186,255,85,.18);filter:drop-shadow(0 0 30px rgba(186,255,85,.15));animation:orb-drift 6s ease-in-out infinite}
+.ecosystem-card h3{font:900 clamp(26px,3vw,38px)/1.02 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:18px 0 10px;letter-spacing:.01em}
+.ecosystem-card p{max-width:370px;color:#9bb1a0;font-size:11px;line-height:1.8}
+.ecosystem-card>a{display:inline-flex;margin-top:14px;color:var(--lime);font-size:10px;font-weight:900}
+.academy-card{background:radial-gradient(circle at 90% 20%,rgba(43,142,84,.3),transparent 35%),linear-gradient(140deg,#112c1c,#091710)!important}
+.community-card{background:radial-gradient(circle at 90% 20%,rgba(29,122,120,.28),transparent 35%),linear-gradient(140deg,#102b25,#091710)!important}
+.tournament-card{background:radial-gradient(circle at 90% 20%,rgba(178,120,34,.2),transparent 35%),linear-gradient(140deg,#2b2416,#0a170f)!important}
+.store-card{background:radial-gradient(circle at 90% 20%,rgba(101,89,172,.2),transparent 35%),linear-gradient(140deg,#1b2031,#091710)!important}
+.partner-section{background:#06110c;padding-top:20px;padding-bottom:90px}
+.partner-section .partner-banner{border-radius:25px;padding:40px;background:linear-gradient(110deg,#153c26,#0b1c13 75%);border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:25px}
+.partner-section .partner-banner h2{font:900 clamp(35px,5vw,58px)/.95 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:14px 0}
+.partner-section .partner-banner p{max-width:500px;color:#a4b9a8;font-size:12px;line-height:1.8}
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+[data-reveal].is-visible{opacity:1;transform:translateY(0)}
+.cinema-theme .modal-card{background:#0a1a12;border:1px solid var(--line);color:#effff1;box-shadow:0 28px 90px rgba(0,0,0,.55)}
+.cinema-theme .modal-head{border-color:var(--line)}.cinema-theme .modal-head h3,.cinema-theme .modal-body h2{color:#f0fff2}
+.cinema-theme .modal-venue-art{background-size:cover;background-position:center;border:1px solid var(--line)}
+.venue-detail-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
+.venue-detail-facts>div{padding:13px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+.venue-detail-facts span{display:block;color:#7f9988;font-size:8px;font-weight:900;letter-spacing:.15em;margin-bottom:7px}.venue-detail-facts strong{display:block;color:#e7f8e9;font-size:10px;line-height:1.55}
+.cinema-theme .booking-summary{background:#10251a;border:1px solid var(--line);border-radius:14px;padding:16px}
+.cinema-theme .disclaimer{color:#78917f}
+.cinema-theme .toast{background:#10281b;color:#edfff0;border:1px solid rgba(186,255,85,.3)}
+@media(max-width:900px){.cinema-section{height:250vh}.cinema-copy{left:6%;width:62vw}.cinema-copy h1{font-size:clamp(58px,11vw,100px)}.cinema-sidecard{right:3%;width:250px}.cinema-search{grid-template-columns:repeat(2,1fr)}.cinema-search .btn{grid-column:span 2}.ecosystem-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.cinema-section{height:220vh}.cinema-sticky{min-height:590px}.cinema-topline{top:100px;left:20px;right:20px;font-size:7px}.cinema-topline span:last-child{display:none}.cinema-copy{left:22px;top:23%;width:calc(100% - 44px)}.cinema-copy h1{font-size:clamp(62px,18vw,92px);margin-bottom:18px}.cinema-copy h2{font-size:clamp(54px,15vw,78px)}.cinema-copy p{font-size:12px;max-width:330px}.cinema-sidecard{top:auto;bottom:90px;right:18px;width:210px;padding:12px 14px}.sidecard-head{font-size:8px}.cinema-sidecard>a{padding:9px 0}.cinema-sidecard>a b{font-size:10px}.cinema-sidecard>a span{font-size:9px}.cinema-ball{top:calc(68% - var(--scene-progress)*24%);font-size:42px}.cinema-scrollhint{bottom:23px;font-size:7px}.section-shell{padding:62px 0}.booking-strip{padding:22px 0}.booking-strip-inner{padding:20px 16px}.booking-strip h2{font-size:25px}.cinema-search{grid-template-columns:1fr 1fr;gap:9px}.cinema-search label span{font-size:7px}.cinema-search select,.cinema-search input{height:43px;font-size:10px}.cinema-search .btn{grid-column:span 2}.trust-line{gap:8px 14px;font-size:8px}.venue-section .section-heading h2,.how-section .section-heading h2,.ecosystem-section .section-heading h2{font-size:43px}.cinematic-venue-grid{grid-template-columns:1fr}.venue-art{height:200px}.ecosystem-grid{grid-template-columns:1fr}.ecosystem-grid .ecosystem-card{min-height:230px;padding:24px}.partner-section .partner-banner{padding:27px 21px;align-items:flex-start;flex-direction:column}.venue-detail-facts{grid-template-columns:1fr}.cinema-theme .header-inner{width:calc(100% - 30px)}}
+@keyframes marquee-run{to{transform:translateX(-40%)}}
+@keyframes scroll-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes wheel-scroll{0%{transform:translateY(0);opacity:1}80%,100%{transform:translateY(9px);opacity:0}}
+@keyframes orb-drift{0%,100%{transform:translate3d(0,0,0) rotate(-8deg)}50%{transform:translate3d(-8px,12px,0) rotate(7deg)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cinema-section{height:auto}.cinema-sticky{position:relative;height:100svh}.cinema-aerial,.cinema-pitch,.cinema-ball{transform:none!important;animation:none!important}.cinema-copy{opacity:1;position:relative;display:none}.cinema-copy-one{display:block}.cinema-sidecard{opacity:1;transform:none}[data-reveal]{opacity:1;transform:none;transition:none}.marquee-track{animation:none}}

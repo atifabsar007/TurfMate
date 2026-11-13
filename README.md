@@ -4,9 +4,10 @@
 
 TurfMate helps players discover football turfs, compare venues and plan a game. The website is being built first; the Android app will follow only after the website and shared booking backend are production-ready.
 
-## Current release: v0.2 website foundation
+## Current release: v0.3 cinematic night-mode website
 
-- Responsive landing page with original TurfMate identity.
+- Cinematic night-mode landing page with pinned stadium-to-pitch scroll storytelling, a scroll-driven football and reveal/tilt motion.
+- Real Dhaka venue discovery seeded from public venue information, with official links and venue-photo sources where available.
 - Venue discovery with area, sport, preferred-time, date and price filters.
 - List and illustrative map views.
 - Venue detail modal with sample session slots and demo checkout.
@@ -38,7 +39,7 @@ npm test
 
 ## Prototype limitations
 
-All venue names, ratings, prices, facilities and slot states are illustrative sample data. No real-time venue inventory is connected. The checkout is a demonstration only; it does not take money, reserve a pitch or create a real booking. Authentication, partner forms, maps, payments, notifications, QR check-in and admin tools are not connected.
+Venue names, some locations, public ratings and listed prices are sourced from public venue pages and map listings. TurfMate does not yet have partner inventory or live slot synchronisation; availability is never represented as live. Some venue photos are from the venue's own public gallery, while generic pitch imagery is illustrative. No real-time venue inventory is connected. The checkout is a demonstration only; it does not take money, reserve a pitch or create a real booking. Authentication, partner forms, maps, payments, notifications, QR check-in and admin tools are not connected.
 
 Do not use prototype values as customer-facing availability or payment claims. Before production, TurfMate needs verified partner agreements, a secure backend, database-level booking conflict prevention, payment-provider merchant approval, signed webhook verification, cancellation/refund rules, privacy and terms review, monitoring and operational testing.
 
