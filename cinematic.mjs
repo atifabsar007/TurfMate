@@ -27,8 +27,9 @@
       bar.style.width=(p*100)+'%';
       photoA.style.opacity=String(clamp(1-smooth((p-.12)/.22)+smooth((p-.82)/.18),0,1));
       photoB.style.opacity=String(clamp(smooth((p-.12)/.2)*(1-smooth((p-.78)/.18)),0,1));
-      photoA.style.transform='scale('+(1+p*1.65)+') translate3d('+(-p*3)+'%, '+(p*2)+'%, 0)';
-      photoB.style.transform='scale('+(1+Math.max(0,p-.12)*1.5)+') translate3d('+(-p*2)+'%, '+(p*1.5)+'%, 0)';
+      const aerialDive=smooth(p/.24),pitchTravel=smooth((p-.2)/.7);
+      photoA.style.transform='scale('+(1+aerialDive*2.45)+') translate3d('+(-aerialDive*4)+'%, '+(aerialDive*3)+'%, 0)';
+      photoB.style.transform='scale('+(1+pitchTravel*.95)+') translate3d('+(-pitchTravel*3)+'%, '+(pitchTravel*2)+'%, 0)';
     }
     function routeSync(){active=!!app.querySelector('.cinema-section');document.body.classList.toggle('cinematic-active',active);hud.hidden=!active;photoA.style.display=active?'block':'none';photoB.style.display=active?'block':'none';canvas.style.display=active?'block':'none';if(active)update();}
     addEventListener('scroll',update,{passive:true});addEventListener('resize',()=>{resize();update();},{passive:true});addEventListener('turfmate:page-rendered',routeSync);new MutationObserver(routeSync).observe(app,{childList:true});routeSync();resize();
@@ -185,9 +186,9 @@
   }
   const ball=new THREE.Mesh(new THREE.SphereGeometry(1.08,48,32),new THREE.MeshPhysicalMaterial({map:makeBallTexture(),roughness:.43,clearcoat:.32}));
   ball.castShadow=true;scene.add(ball);
-  const ballPath=new THREE.CatmullRomCurve3([[-46,1.25,22],[-35,1.25,14],[-22,1.25,7],[-9,1.35,2],[5,1.6,0],[18,4.4,0],[31,7.6,0],[41,6.8,0],[48,4.5,0],[53.5,2.9,0],[57.5,1.9,0]].map(p=>new THREE.Vector3(...p)),false,'catmullrom',.45);
-  const entryCam=new THREE.CatmullRomCurve3([[0,112,160],[64,78,126],[56,42,82],[-16,19,54],[-55,5.5,34]].map(p=>new THREE.Vector3(...p)));
-  const entryLook=new THREE.CatmullRomCurve3([[0,0,0],[0,0,0],[-5,0,0],[-26,0,12],[-36,0,20]].map(p=>new THREE.Vector3(...p)));
+  const ballPath=new THREE.CatmullRomCurve3([[-20,1.25,15],[-14,1.25,11],[-7,1.25,8],[1,1.25,5],[10,1.25,2],[18,1.45,-2],[26,2.4,-5],[34,4.6,-7],[42,7.2,-6],[49,6.2,-3],[53.5,3.4,-1],[57.5,1.9,0]].map(p=>new THREE.Vector3(...p)),false,'catmullrom',.42);
+  const entryCam=new THREE.CatmullRomCurve3([[0,158,68],[0,126,58],[0,91,48],[-3,55,34],[-10,4.8,21]].map(p=>new THREE.Vector3(...p)));
+  const entryLook=new THREE.CatmullRomCurve3([[0,0,0],[0,0,0],[0,0,0],[-2,1,3],[-2,1.25,12]].map(p=>new THREE.Vector3(...p)));
   const exitCam=new THREE.CatmullRomCurve3([[39,5,19],[64,18,48],[26,48,106],[0,106,164]].map(p=>new THREE.Vector3(...p)));
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t)};
   let progress=0,active=false,paused=false,chapter=-1,last=performance.now();
@@ -200,8 +201,9 @@
   function updatePhotoPlates(){
     photoA.style.opacity=String(1-smooth((progress-.04)/.22));
     photoB.style.opacity=String(clamp(smooth((progress-.1)/.2)*(1-smooth((progress-.32)/.16)),0,1));
-    photoA.style.transform='scale('+(1+progress*1.75)+') translate3d('+(-progress*3.5)+'%, '+(progress*2)+'%, 0)';
-    photoB.style.transform='scale('+(1+Math.max(0,progress-.1)*1.65)+') translate3d('+(-progress*2)+'%, '+(progress*1.5)+'%, 0)';
+    const aerialDive=smooth(progress/.24),pitchTravel=smooth((progress-.2)/.7);
+    photoA.style.transform='scale('+(1+aerialDive*2.45)+') translate3d('+(-aerialDive*4)+'%, '+(aerialDive*3)+'%, 0)';
+    photoB.style.transform='scale('+(1+pitchTravel*.95)+') translate3d('+(-pitchTravel*3)+'%, '+(pitchTravel*2)+'%, 0)';
   }
   function readScroll(){
     const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);progress=reduce.matches?0:clamp(scrollY/max,0,1);bar.style.width=(progress*100)+'%';
@@ -222,7 +224,7 @@
   function animate(now){
     requestAnimationFrame(animate);if(!active||document.hidden)return;
     const dt=Math.min(.05,(now-last)/1000);last=now;const p=progress,q=smooth((p-.22)/.62);
-    const bp=ballPath.getPointAt(q),tan=ballPath.getTangentAt(q).normalize();ball.position.copy(bp);ball.visible=p>.20&&p<.91;
+    const bp=ballPath.getPointAt(q),tan=ballPath.getTangentAt(q).normalize();ball.position.copy(bp);ball.visible=p>.205&&p<.91;
     const goalSlow=smooth((q-.82)/.08)*(1-smooth((q-.985)/.015));
     if(!paused&&!reduce.matches){ball.rotation.x+=dt*(2.5-goalSlow*2.0);ball.rotation.z+=dt*(3.2-goalSlow*2.55);}
     const impact=smooth((q-.91)/.035)*(1-smooth((q-.995)/.02));
@@ -230,10 +232,12 @@
     if(goalFlash)goalFlash.intensity=impact*5.5;
     let pos,target;
     if(reduce.matches){pos=new THREE.Vector3(0,48,108);target=new THREE.Vector3(0,0,0);}
-    else if(p<.23){const t=smooth(p/.23);pos=entryCam.getPointAt(t);target=entryLook.getPointAt(t);}
-    else if(p<.87){const close=smooth((q-.76)/.19),distance=9-close*4.8,height=3.9+close*.8,lookAhead=7+close*2.2;pos=bp.clone().addScaledVector(tan,-distance).add(new THREE.Vector3(0,height,0));target=bp.clone().addScaledVector(tan,lookAhead).add(new THREE.Vector3(0,.25,0));}
+    else if(p<.22){const t=smooth(p/.22);pos=entryCam.getPointAt(t);target=entryLook.getPointAt(t);}
+    else if(p<.87){const close=smooth((q-.76)/.19),distance=5.8-close*1.7,height=2.7+close*.5,lookAhead=7.5+close*2.8;pos=bp.clone().addScaledVector(tan,-distance).add(new THREE.Vector3(0,height,0));target=bp.clone().addScaledVector(tan,lookAhead).add(new THREE.Vector3(0,.3,0));}
     else{const t=smooth((p-.87)/.13);pos=exitCam.getPointAt(t);target=new THREE.Vector3(0,0,0);}
-    camera.position.lerp(pos,reduce.matches ? .08 : .075);look.lerp(target,reduce.matches ? .08 : .085);camera.lookAt(look);camera.rotation.z=reduce.matches?0:Math.sin(q*Math.PI*2)*.012;canvas.style.opacity=String(reduce.matches?1:smooth((p-.015)/.12));renderer.render(scene,camera);
+    const targetFov=reduce.matches?52:(p<.22?58-12*smooth(p/.22):p<.87?46-3*smooth((q-.72)/.28):43+9*smooth((p-.87)/.13));
+    camera.fov+=(targetFov-camera.fov)*.055;camera.updateProjectionMatrix();
+    camera.position.lerp(pos,reduce.matches ? .08 : .075);look.lerp(target,reduce.matches ? .08 : .085);camera.lookAt(look);camera.rotation.z=reduce.matches?0:Math.sin(q*Math.PI*2)*.009;canvas.style.opacity=String(reduce.matches?1:smooth((p-.015)/.12));renderer.render(scene,camera);
   }
   requestAnimationFrame(animate);
   if(reduce.addEventListener)reduce.addEventListener('change',readScroll);
