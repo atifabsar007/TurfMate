@@ -9,7 +9,7 @@ TurfMate helps players discover football turfs, compare venues and plan a game. 
 - Eight-chapter cinematic homepage inspired by the supplied Instagram/iStock visual direction: sports-intro typography → high aerial stadium view → steep camera dive into the pitch → low ball-follow camera → dribble and rising football shot → slow-motion net impact → final stadium reveal.
 - The opening camera starts much higher above the stadium, dives toward the centre of the field, tightens its lens and hands off smoothly to a low football-follow camera. The ball dribbles across the grass, accelerates and rises toward the goal; the camera follows it and closes in during the goal moment. A procedural net flexes at impact and a restrained light pulse marks the finish.
 - The sequence remains tied to native page scrolling across the homepage and reverses naturally when scrolling upward.
-- Dynamic Three.js loading with a visible 2D cinematic photo-and-football fallback if WebGL or the external module cannot initialise; no silent black hero.
+- Dynamic Three.js loading with a visible 2D cinematic photo-and-football fallback if WebGL or the external module cannot initialise; a licensed-free Pexels aerial stadium photo prevents a blank opening hero, and the 3D ground/stands/floodlights use a brighter matchday palette.
 - Real Dhaka venue discovery seeded from public venue information, with official links and venue-photo sources where available.
 - Venue discovery with area, sport, preferred-time, date and price filters.
 - List and illustrative map views.
@@ -17,6 +17,8 @@ TurfMate helps players discover football turfs, compare venues and plan a game. 
 - Saved venue shortlist persisted locally on the current device.
 - Academy, Community, Tournaments and Store information pages.
 - Early turf-partner interest form (not connected to a server).
+- Separate login and registration pages with local demo accounts (PBKDF2 password hashes; no plaintext password storage), account menu and logout.
+- Booking enquiry forms, partner interest forms and tournament interest forms save prototype records locally in the current browser; they do not submit to venues or organisers.
 - Accessible modal behaviour, keyboard dismissal and reduced-motion support.
 - GitHub Actions syntax and smoke tests.
 
