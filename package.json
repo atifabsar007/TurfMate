@@ -5,7 +5,7 @@
   "description": "TurfMate continuous photo-to-3D cinematic football stadium website.",
   "scripts": {
     "dev": "python3 -m http.server 4173",
-    "test": "node --check app.js && node --check cinematic.mjs && node tests/smoke-test.js"
+    "test": "node --check app.js && node --check backend.js && node --check cinematic.mjs && node tests/smoke-test.js"
   },
   "engines": {
     "node": ">=20"

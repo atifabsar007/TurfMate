@@ -104,9 +104,8 @@
     const {data,error}=await ensure().auth.signUp({email,password,options:{data:{full_name:name,username,phone}}});
     if(error)throw error;
     if(!data.session)return {session:null,user:data.user,profile:null};
-    const profile={id:data.user.id,name,email:data.user.email,username,phone};
-    await updateProfile(profile);
-    return {session:data.session,user:data.user,profile};
+    const row=await getProfileRow(data.user.id);
+    return {session:data.session,user:data.user,profile:profileMap(row,data.user.email)};
   }
   async function signIn(email,password){
     const {data,error}=await ensure().auth.signInWithPassword({email,password});
