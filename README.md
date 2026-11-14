@@ -94,3 +94,5 @@ Work on feature branches and merge reviewed pull requests into `main`. Keep the 
 - Added optional public profile-photo URLs with HTTP/HTTPS validation and avatar fallbacks. The photo field is editable from the player dashboard.
 
 - Hero section jump controls use in-page scrolling without breaking the hash-based router.
+
+- Team standings ignore completed fixture records that do not contain a recorded score, preventing unknown results from being counted as draws.

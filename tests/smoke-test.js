@@ -128,3 +128,5 @@ assert.ok(js.includes("avatarUrl=String(fd.get('avatarUrl')||'').trim()"));
 
 assert.ok(js.includes("if(a==='scroll-elite')"));
 assert.ok(js.includes('data-target="elite-player-rankings"'));
+
+assert.ok(js.includes('if(m.homeScore==null||m.awayScore==null)return;'));
