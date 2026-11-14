@@ -21,6 +21,8 @@ assert.ok(js.includes("id=\"player-profile-form\""));
 assert.ok(js.includes('turfmate:team-invites'));
 assert.ok(js.includes('turfmate:matches'));
 assert.ok(js.includes("data-action=\"respond-invite\""));
+assert.ok(js.includes("members.push({accountId:state.user.id"));
+assert.ok(js.includes("You joined the team."));
 assert.ok(js.includes("data-action=\"complete-match\""));
 assert.ok(js.includes("route==='/dashboard'"));
 assert.ok(html.includes('data-nav=\"dashboard\"'));
