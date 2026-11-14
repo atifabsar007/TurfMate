@@ -125,3 +125,6 @@ assert.ok(html.includes('data-nav="leaderboard"'));
 assert.ok(js.includes('function playerAvatarMarkup(player,className)'));
 assert.ok(js.includes('name="avatarUrl"'));
 assert.ok(js.includes("const avatarUrl=String(fd.get('avatarUrl')||'').trim()"));
+
+assert.ok(js.includes("if(a==='scroll-elite')"));
+assert.ok(js.includes('data-target="elite-player-rankings"'));

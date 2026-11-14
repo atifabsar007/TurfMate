@@ -611,3 +611,5 @@ body.cinematic-active .cinema-section .cinema-sticky:after{
 .player-avatar.has-photo,.elite-avatar.has-photo,.elite-table-avatar.has-photo,.elite-compare-avatar.has-photo,.elite-profile-avatar.has-photo{object-fit:cover;overflow:hidden;border-radius:50%;display:block;background:#dcebd3}
 .player-avatar.has-photo{width:48px;height:48px}.elite-avatar.has-photo{width:62px;height:62px}.elite-table-avatar.has-photo{width:34px;height:34px}.elite-compare-avatar.has-photo{width:58px;height:58px}.elite-profile-avatar.has-photo{width:94px;height:94px}
 @media(max-width:650px){.elite-profile-avatar.has-photo{width:62px;height:62px}}
+
+.elite-scroll-button{border:0;background:transparent;cursor:pointer;font:inherit}.elite-hero-actions .elite-scroll-button{padding:12px 17px;border-radius:7px;background:var(--elite-lime);color:#102516;font-weight:900;font-size:10px}
