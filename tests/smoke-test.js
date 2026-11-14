@@ -14,6 +14,8 @@ assert.ok(js.includes('turfmate:page-rendered'));
 assert.ok(js.includes('function authPage(mode)'));
 assert.ok(js.includes('function accountModal()'));
 assert.ok(js.includes('function dashboardPage()'));
+assert.ok(js.includes("data-action=\"profile-jump\""));
+assert.ok(js.includes("if(a==='profile-jump')"));
 assert.ok(js.includes('function communityPage()'));
 assert.ok(js.includes("id=\"team-form\""));
 assert.ok(js.includes("id=\"match-form\""));
