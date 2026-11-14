@@ -103,3 +103,21 @@ assert.ok(js.includes('playerAssists'));
 assert.ok(js.includes('PLAYER PERFORMANCE'));
 assert.ok(css.includes('STEP 5 — player performance and match analytics'));
 assert.ok(css.includes('.match-event-log'));
+
+// Step 6 — Elite football experience
+assert.ok(js.includes('function leaderboardPage()'));
+assert.ok(js.includes('function playerProfilePage(id)'));
+assert.ok(js.includes("route==='/leaderboard'"));
+assert.ok(js.includes("route.startsWith('/player/')"));
+assert.ok(js.includes("data-action=\"vote-motm\""));
+assert.ok(js.includes("if(a==='vote-motm')"));
+assert.ok(js.includes("if(a==='share-player-card')"));
+assert.ok(js.includes("if(a==='download-player-card')"));
+assert.ok(js.includes('function playerPerformance(playerId'));
+assert.ok(js.includes('function teamPerformance(team'));
+assert.ok(js.includes('function downloadPlayerStatCard(p,s)'));
+assert.ok(js.includes("if(form.id==='player-compare-form')"));
+assert.ok(css.includes('STEP 6 — Elite football experience'));
+assert.ok(css.includes('.elite-stadium-orb'));
+assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
+assert.ok(html.includes('data-nav="leaderboard"'));

@@ -81,3 +81,12 @@ Work on feature branches and merge reviewed pull requests into `main`. Keep the 
 - Match cards show a chronological goal-event log and assist information.
 - Player dashboard calculates goals, assists, wins and win rate from recorded match events.
 - Goal events and personal analytics are stored locally in the browser prototype; verified multi-user stats require the future shared backend.
+
+
+## Step 6 — Elite Football Experience
+
+- Added a premium performance hub at `#/leaderboard` with a CSS 3D stadium-orb animation, animated player podium, player rankings, team league standings, player comparisons and Man of the Match voting.
+- Added public player profile pages at `#/player/<player-id>` with performance statistics, achievement badges, recent match history and a shareable SVG player card.
+- Added a motion pause control, pointer-responsive 3D card tilt, responsive layouts and reduced-motion support.
+- Player ranking formula: 4 points per goal, 3 per assist, 2 per win and 5 per Man of the Match vote. Team league points: 3 per win and 1 per draw.
+- All rankings and votes are derived from local browser records. This is a front-end prototype, not yet a shared verified competition or cross-device leaderboard.
