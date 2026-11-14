@@ -122,7 +122,8 @@
   }
   async function updateProfile(patch){
     const session=await currentSession();if(!session)throw new Error('Please log in again to update your profile.');
-    const payload=profilePayload({...patch,id:session.user.id});
+    const existing=await getProfileRow(session.user.id);
+    const payload=profilePayload({...profileMap(existing,session.user.email),...patch,id:session.user.id});
     const {data,error}=await ensure().from('profiles').upsert(payload,{onConflict:'id'}).select('*').single();
     if(error)throw error;
     const mapped=profileMap(data,session.user.email),accounts=$read('turfmate:accounts'),i=accounts.findIndex(x=>x.id===mapped.id);
