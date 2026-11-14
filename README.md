@@ -55,3 +55,11 @@ See [docs/PRODUCT_ROADMAP.md](docs/PRODUCT_ROADMAP.md). Reference-product resear
 ## Development approach
 
 Work on feature branches and merge reviewed pull requests into `main`. Keep the booking journey reliable before expanding secondary modules. The future Android app must use the same backend, authentication, venue inventory, booking lifecycle and payment verification as the website.
+
+
+## Step 3 — Player Dashboard & Football Community
+
+- Player profile editor with position, preferred foot, area, experience level, bio, public-profile and availability preferences.
+- Player dashboard with teams, local team invitations, friendly match planning, upcoming fixtures and match history.
+- Community directory for public player profiles stored in the same browser.
+- Prototype data is local to one browser/device. Team invitations are not emailed and the player directory is not a shared network. A secure backend is required for multi-device and real-time collaboration.
