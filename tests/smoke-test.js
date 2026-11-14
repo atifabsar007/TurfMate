@@ -130,3 +130,25 @@ assert.ok(js.includes("if(a==='scroll-elite')"));
 assert.ok(js.includes('data-target="elite-player-rankings"'));
 
 assert.ok(js.includes('if(m.homeScore==null||m.awayScore==null)return;'));
+
+// Step 7 — Supabase cloud backend integration
+const cloud = fs.readFileSync(path.join(root, 'backend.js'), 'utf8');
+const sql = fs.readFileSync(path.join(root, 'supabase/migrations/202611140001_turfmate_cloud_backend.sql'), 'utf8');
+const config = fs.readFileSync(path.join(root, 'backend-config.js'), 'utf8');
+assert.ok(html.includes('backend-config.js'));
+assert.ok(html.includes('backend.js'));
+assert.ok(html.indexOf('backend.js') < html.indexOf('app.js'));
+assert.ok(cloud.includes('signInWithPassword'));
+assert.ok(cloud.includes('tm_join_match'));
+assert.ok(cloud.includes('tm_vote_motm'));
+assert.ok(cloud.includes('uploadAvatar'));
+assert.ok(cloud.includes('postgres_changes'));
+assert.ok(sql.includes('enable row level security'));
+assert.ok(sql.includes('tm_record_goal'));
+assert.ok(sql.includes('tm_respond_team_invite'));
+assert.ok(sql.includes('storage.foldername(name)'));
+assert.ok(config.includes('YOUR_SUPABASE_ANON_OR_PUBLISHABLE_KEY'));
+assert.ok(!config.includes('service_role'));
+assert.ok(js.includes('function notificationsPage()'));
+assert.ok(js.includes("route==='/notifications'"));
+assert.ok(js.includes('window.TurfMateCloud.bootstrap()'));

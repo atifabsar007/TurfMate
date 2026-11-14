@@ -96,3 +96,28 @@ Work on feature branches and merge reviewed pull requests into `main`. Keep the 
 - Hero section jump controls use in-page scrolling without breaking the hash-based router.
 
 - Team standings ignore completed fixture records that do not contain a recorded score, preventing unknown results from being counted as draws.
+
+
+## Step 7 — Cloud backend and real-time infrastructure
+
+TurfMate now includes an optional Supabase backend adapter, SQL migration, cloud authentication, profile sync, private booking records, shared teams and fixtures, server-validated match actions, profile image storage, team invitations, notifications and Realtime refresh.
+
+### Connect a Supabase project
+
+1. Create a Supabase project.
+2. Open **SQL Editor** and run `supabase/migrations/202611140001_turfmate_cloud_backend.sql`.
+3. Copy `backend-config.example.js` to `backend-config.js` and add the Project URL and anon/publishable key from Supabase Project Settings → API.
+4. Never place a service-role/secret key in browser code.
+5. In Supabase Auth, configure the production site URL and email redirect URLs. For production, enable email confirmation and configure SMTP.
+6. Deploy the site over HTTPS and test with two separate accounts/devices.
+
+Without a configured Supabase project, the existing local demo mode remains available. Cloud mode is activated only after the public URL and anon/publishable key are added. The Supabase SQL migration and client integration are included in the repository; a live Supabase project has not been provisioned by this code change.
+
+### Cloud security and behaviour
+
+- Supabase Auth owns passwords and sessions; browser code never stores cloud passwords or password hashes.
+- Row Level Security protects private profiles and booking enquiries. Public teams and open fixtures are readable by visitors.
+- Match join/leave, start, goal recording, completion, line-up changes and Man of the Match voting use database RPCs with server-side checks.
+- Team invitations and activity notifications are stored in shared tables; database Realtime events refresh connected clients.
+- Player photos are uploaded to the `player-avatars` bucket under the authenticated user's folder (5 MB limit).
+- The browser anon key is public by design; RLS and database functions enforce access. Never use a service-role key in the website.
