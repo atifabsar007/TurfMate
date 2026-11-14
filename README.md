@@ -63,3 +63,13 @@ Work on feature branches and merge reviewed pull requests into `main`. Keep the 
 - Player dashboard with teams, local team invitations, friendly match planning, upcoming fixtures and match history.
 - Community directory for public player profiles stored in the same browser.
 - Prototype data is local to one browser/device. Team invitations are not emailed and the player directory is not a shared network. A secure backend is required for multi-device and real-time collaboration.
+
+
+## Step 4 — Matchmaking & Live Match Centre
+
+- Dedicated Match Centre at `#/matches` with open fixture discovery and filters for area, position needed and match level.
+- Publish 5-a-side, 7-a-side or 11-a-side open matches; players can join either side, leave before kick-off and see squad capacity.
+- Organisers can start matches, update a live scoreboard and save a final result.
+- Formation and line-up editor supports 5v5, 7v7 and 11v11 formation presets and player position assignments.
+- Personal match record summarises appearances, wins, draws and team goals in completed matches.
+- This remains a local-browser prototype. A secure shared backend is required for public cross-device matchmaking, live synchronisation, identity verification and push notifications.

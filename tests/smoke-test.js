@@ -75,3 +75,21 @@ for (const route of ['/explore', '/saved', '/bookings', '/academy', '/community'
   assert.ok(js.includes(`'${route}'`) || js.includes(`"${route}"`), `Route missing: ${route}`);
 }
 console.log('TurfMate smoke tests passed, including cinematic scroll checks.');
+
+assert.ok(js.includes('function matchesPage()'));
+assert.ok(js.includes('function matchCard(match)'));
+assert.ok(js.includes('function lineupModal(matchId)'));
+assert.ok(js.includes("route==='/matches'"));
+assert.ok(js.includes('id="open-match-form"'));
+assert.ok(js.includes('id="match-filter-form"'));
+assert.ok(js.includes('id="lineup-form"'));
+assert.ok(js.includes("data-action=\"join-match\""));
+assert.ok(js.includes("data-action=\"start-match\""));
+assert.ok(js.includes("data-action=\"score-match\""));
+assert.ok(js.includes("data-action=\"finish-match\""));
+assert.ok(js.includes("openToPlayers:true"));
+assert.ok(js.includes("status:'live'"));
+assert.ok(js.includes("status:'completed'"));
+assert.ok(js.includes("playersPerSide"));
+assert.ok(css.includes('STEP 4 — matchmaking and live match centre'));
+assert.ok(html.includes('data-nav="matches"'));
