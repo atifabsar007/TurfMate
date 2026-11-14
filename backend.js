@@ -12,7 +12,7 @@
     if(!configured)throw new Error('Cloud backend is not configured yet.');
     if(!client){
       if(!window.supabase?.createClient)throw new Error('Supabase client could not load. Refresh the page and try again.');
-      client=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+      client=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});client.auth.onAuthStateChange(event=>{if(event==='PASSWORD_RECOVERY')window.dispatchEvent(new Event('turfmate:password-recovery'));});
     }
     return client;
   }
@@ -113,6 +113,8 @@
     const row=await getProfileRow(data.user.id);
     return {session:data.session,user:data.user,profile:profileMap(row,data.user.email)};
   }
+  async function requestPasswordReset(email){const redirectTo=window.location.origin+window.location.pathname+'?recovery=1';const {error}=await ensure().auth.resetPasswordForEmail(email,{redirectTo});if(error)throw error;return true;}
+  async function updatePassword(password){const {data,error}=await ensure().auth.updateUser({password});if(error)throw error;return data.user;}
   async function signOut(){
     if(!configured)return;
     const {error}=await ensure().auth.signOut();
@@ -192,7 +194,7 @@
     await refreshNotifications();
   }
   window.TurfMateCloud={
-    get configured(){return configured;},bootstrap,currentUser,signUp,signIn,signOut,updateProfile,uploadAvatar,saveRecord,updateRecord,
+    get configured(){return configured;},bootstrap,currentUser,signUp,signIn,signOut,requestPasswordReset,updatePassword,updateProfile,uploadAvatar,saveRecord,updateRecord,
     updateMatchLineups,joinMatch,leaveMatch,startMatch,recordGoal,finishMatch,voteMotm,invitePlayer,respondInvite,markNotificationRead,markAllNotificationsRead,
     refreshNotifications
   };

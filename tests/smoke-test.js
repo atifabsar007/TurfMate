@@ -155,3 +155,8 @@ assert.ok(js.includes("route==='/notifications'"));
 assert.ok(js.includes('window.TurfMateCloud.bootstrap()'));
 
 assert.ok(cloud.includes('profileMap(existing,session.user.email)'));
+
+assert.ok(cloud.includes('resetPasswordForEmail'));
+assert.ok(cloud.includes('updateUser({password})'));
+assert.ok(js.includes("id=\"password-reset-form\""));
+assert.ok(js.includes("data-action=\"forgot-password\""));
