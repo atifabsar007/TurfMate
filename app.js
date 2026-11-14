@@ -39,11 +39,37 @@ function dateObj(offset){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.get
 function dateLabel(offset){const d=dateObj(offset);return {day:d.toLocaleDateString('en-US',{weekday:'short'}),date:d.getDate(),month:d.toLocaleDateString('en-US',{month:'short'})}}
 function art(label='PITCH / DHAKA',v){return `<div class="venue-art ${v?.image?'has-photo':''}" aria-hidden="true">${v?.image?`<img src="${esc(v.image)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="art-lines"></span><span class="art-label">${esc(label)}</span><span class="venue-badge">${esc(v?.label||'TurfMate pick')}</span>${v?`<button class="favorite ${state.favorites.has(v.id)?'saved':''}" data-action="favorite" data-id="${v.id}" aria-label="${state.favorites.has(v.id)?'Remove':'Save'} ${esc(v.name)}">${state.favorites.has(v.id)?'♥':'♡'}</button>`:''}</div>`}
 function card(v){return `<article class="venue-card" data-open-venue="${v.id}">${art(v.area.toUpperCase(),v)}<div class="venue-info"><div class="venue-top"><div><h3>${esc(v.name)}</h3><div class="venue-area">⌖ ${esc(v.area)}, Dhaka</div></div><div class="rating">${v.rating?'<b>★</b> '+v.rating.toFixed(1):'<span>Rating pending</span>'}</div></div><p class="venue-description">${esc(v.description)}</p><div class="tags">${v.sports.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}${v.amenities.slice(0,1).map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div><div class="venue-bottom"><div><div class="price-label">${v.price>0?'Starting from':'Pricing'}</div><div class="price">${money(v.price)} ${v.price>0?'<small>/ 90 min</small>':''}</div></div><a class="venue-official" href="${esc(v.website)}" target="_blank" rel="noopener noreferrer">Official info ↗</a></div></div></article>`}function home(){return `
-<section class="cinema-section" id="cinematic" aria-label="TurfMate continuous stadium journey" data-scene-section="stadium"><div class="cinema-sticky"><div class="cinema-vignette"></div>
-<div class="cinema-topline"><span><i class="live-dot"></i> DHAKA · NIGHT GAME CULTURE</span><span>SCROLL TO TRAVEL THE STADIUM</span></div>
-<div class="cinema-copy cinema-copy-one is-active"><span class="eyebrow">A NEW WAY TO EXPERIENCE THE GAME</span><h1>THE GAME<br><em>STARTS HERE.</em></h1><p>One city. Thousands of players. Your next pitch is waiting. Scroll in and travel from the stadium roof to the touchline.</p><a class="btn btn-lime" href="#/explore">Find your pitch <span>↗</span></a></div>
-<div class="cinema-sidecard"><div class="sidecard-head"><span><i class="live-dot"></i> DHAKA VENUE RADAR</span><small>REAL PLACES</small></div><a href="https://turfnationbd.com/" target="_blank" rel="noopener noreferrer"><b>Turf Nation</b><span>Tejgaon</span><strong>↗</strong></a><a href="https://www.jaff.com.bd/" target="_blank" rel="noopener noreferrer"><b>JAFF Arena</b><span>Bashundhara R/A</span><strong>↗</strong></a><a href="https://www.corexarena.com/" target="_blank" rel="noopener noreferrer"><b>Corex Arena</b><span>Mirpur 12</span><strong>↗</strong></a></div>
-<div class="cinema-scrollhint"><span class="scroll-wheel"></span><span>SCROLL · THE CAMERA FOLLOWS THE BALL</span><b>↓</b></div></div></section>
+<section class="cinema-section" id="cinematic" aria-label="TurfMate stadium-to-pitch experience" data-scene-section="stadium">
+<div class="cinema-sticky">
+  <div class="cinema-vignette"></div>
+  <div class="cinema-topline"><span><i class="live-dot"></i> REAL DHAKA VENUES · BUILT FOR THE GAME</span><span>SCROLL TO DESCEND</span></div>
+  <div class="cinema-copy cinema-copy-one is-active" data-hero-scene="0" aria-hidden="false">
+    <span class="eyebrow">A NEW WAY TO EXPERIENCE THE GAME</span>
+    <h1>THE GAME<br><em>STARTS HERE.</em></h1>
+    <p>One city. Countless squads. Your next match begins with finding the right pitch. Scroll in and take the journey from the stadium roof to the touchline.</p>
+    <a class="btn btn-lime" href="#/explore">Find your pitch <span>↗</span></a>
+  </div>
+  <div class="cinema-copy cinema-copy-two" data-hero-scene="1" aria-hidden="true">
+    <span class="eyebrow">FROM THE STANDS TO THE SIDELINE</span>
+    <h2>GET CLOSER<br>TO THE GAME.</h2>
+    <p>Feel the scale of the stadium. Follow the camera down through the stands and into the lights, where every match starts with a team.</p>
+    <a class="text-link" href="#/explore">Explore Dhaka venues ↗</a>
+  </div>
+  <div class="cinema-copy cinema-copy-three" data-hero-scene="2" aria-hidden="true">
+    <span class="eyebrow">YOUR SQUAD. YOUR TIME.</span>
+    <h2>FIND YOUR<br><em>PITCH.</em></h2>
+    <p>From the first touch to the final whistle, discover real venues, compare the details and get your next game organised.</p>
+    <a class="btn btn-lime" href="#/explore">Explore real turfs <span>↗</span></a>
+  </div>
+  <div class="cinema-sidecard">
+    <div class="sidecard-head"><span><i class="live-dot"></i> DHAKA VENUE RADAR</span><small>REAL PLACES</small></div>
+    <a href="https://turfnationbd.com/" target="_blank" rel="noopener noreferrer"><b>Turf Nation</b><span>Tejgaon</span><strong>↗</strong></a>
+    <a href="https://www.jaff.com.bd/" target="_blank" rel="noopener noreferrer"><b>JAFF Arena</b><span>Bashundhara R/A</span><strong>↗</strong></a>
+    <a href="https://www.corexarena.com/" target="_blank" rel="noopener noreferrer"><b>Corex Arena</b><span>Mirpur 12</span><strong>↗</strong></a>
+  </div>
+  <div class="cinema-scrollhint"><span class="scroll-wheel"></span><span>SCROLL · THE CAMERA FOLLOWS THE BALL</span><b>↓</b></div>
+</div>
+</section>
 <section class="booking-strip section-shell" data-scene-section="arrival" data-reveal><div class="container"><div class="booking-strip-inner"><div><span class="eyebrow">02 / ARRIVE AT THE PITCH</span><h2>Find a slot. Bring the squad.</h2></div><form class="cinema-search" id="home-search"><label><span>AREA</span><select name="area"><option>All Dhaka</option>${areas.map(a=>`<option>${a}</option>`).join('')}</select></label><label><span>SPORT</span><select name="sport"><option>Football</option><option>Futsal</option><option>Cricket</option></select></label><label><span>DATE</span><input name="date" type="date" min="${todayISO()}" value="${state.filters.date}"></label><label><span>TIME</span><select name="time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label><button class="btn btn-lime" type="submit">Find a pitch ↗</button></form></div><div class="trust-line"><span>✦ Dhaka-first venue discovery</span><span>✦ Official venue information</span><span>✦ No fake live-slot claims</span></div></div></section>
 <section class="section-shell venue-section" data-scene-section="touchline"><div class="container"><div class="section-heading" data-reveal><div><div class="eyebrow">03 / THE TOUCHLINE</div><h2>Real grounds. Real game nights.</h2><p>Explore actual Dhaka venues. Pricing and booking availability are shown only when verified by the venue.</p></div><a class="text-link" href="#/explore">Explore all venues ↗</a></div><div class="venue-grid cinematic-venue-grid">${venues.slice(0,3).map(card).join('')}</div><div class="venue-footnote">Venue names and locations are sourced from their public venue pages. Availability is not yet connected to partner calendars.</div></div></section>
 <section class="marquee-band" data-scene-section="matchday" aria-hidden="true"><div class="marquee-track"><span>PLAY UNDER THE LIGHTS</span><b>✳</b><span>FIND YOUR PEOPLE</span><b>✳</b><span>OWN THE NIGHT</span><b>✳</b><span>PLAY UNDER THE LIGHTS</span><b>✳</b><span>FIND YOUR PEOPLE</span><b>✳</b></div></section>

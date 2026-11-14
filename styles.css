@@ -453,3 +453,107 @@ body.cinematic-active .tm-cinema-hud{background:rgba(8,35,20,.78);border-color:r
 .request-status{font-size:8px;font-weight:900;letter-spacing:.14em;color:#c5ff59}
 @media(max-width:800px){.auth-page{grid-template-columns:1fr;margin:18px auto 38px}.auth-visual{min-height:270px;padding:22px 24px}.auth-visual-copy{padding:30px 0 12px}.auth-visual-copy h2{font-size:54px}.auth-visual-foot{font-size:7px}.auth-panel{padding:30px 24px}.booking-request-card{align-items:flex-start;flex-direction:column}.booking-request-card .btn{width:100%;justify-content:center}}
 @media(max-width:520px){.auth-page{width:calc(100% - 24px);border-radius:18px}.auth-visual{min-height:230px}.auth-live{display:none}.auth-visual-copy h2{font-size:48px}.auth-visual-copy p{font-size:11px}.auth-panel{padding:26px 19px}.venue-action-row{flex-direction:column}.venue-action-row .btn{width:100%}}
+
+
+/* TURFMATE STEP 1 — pinned cinematic homepage intro */
+body.cinematic-active .cinema-section{
+  height:270svh;
+  min-height:0;
+  overflow:visible;
+  position:relative;
+  isolation:isolate;
+  background:transparent!important;
+}
+body.cinematic-active .cinema-sticky{
+  position:sticky;
+  top:0;
+  height:100svh;
+  min-height:640px;
+  overflow:hidden;
+  background:transparent!important;
+  isolation:isolate;
+}
+body.cinematic-active .cinema-copy{
+  top:25%;
+  left:7%;
+  width:min(680px,58vw);
+  transition:opacity .72s ease,transform .95s cubic-bezier(.2,.75,.2,1),filter .72s ease;
+}
+body.cinematic-active .cinema-copy:not(.is-active){
+  filter:blur(3px);
+}
+body.cinematic-active .cinema-copy h1,
+body.cinematic-active .cinema-copy h2{
+  font-family:"Barlow Condensed",Impact,sans-serif;
+  font-size:clamp(70px,9.4vw,140px);
+  line-height:.79;
+  font-weight:900;
+  letter-spacing:-.045em;
+  text-transform:uppercase;
+  text-shadow:0 18px 70px rgba(0,0,0,.48);
+}
+body.cinematic-active .cinema-copy h2{font-size:clamp(60px,8.1vw,116px)}
+body.cinematic-active .cinema-copy p{
+  max-width:465px;
+  font-size:14px;
+  line-height:1.85;
+  color:#e1eee2;
+  text-shadow:0 3px 20px rgba(0,0,0,.5);
+}
+body.cinematic-active .cinema-copy .eyebrow{
+  margin-bottom:22px;
+  color:#d7ff9a!important;
+}
+body.cinematic-active .cinema-sidecard{
+  opacity:calc(1 - var(--hero-progress,0)*1.45);
+  transform:translate3d(0,calc(var(--hero-progress,0)*22px),0);
+  transition:opacity .25s ease;
+}
+body.cinematic-active .cinema-scrollhint{
+  opacity:calc(1 - var(--hero-progress,0)*1.8);
+  transition:opacity .2s ease;
+}
+body.cinematic-active .cinema-topline{
+  top:112px;
+  color:#e3f4e4;
+}
+body.cinematic-active .cinema-vignette{
+  background:
+    radial-gradient(ellipse at 75% 43%,rgba(195,255,90,.10),transparent 42%),
+    linear-gradient(90deg,rgba(2,17,9,.54),rgba(2,17,9,.2) 54%,rgba(2,17,9,.02)),
+    linear-gradient(0deg,rgba(2,17,9,.34),transparent 48%,rgba(2,17,9,.08));
+}
+body.cinematic-active .cinema-section .cinema-sticky:after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
+  height:20%;
+  pointer-events:none;
+  background:linear-gradient(0deg,rgba(5,23,12,.28),transparent);
+}
+@media(max-width:900px){
+  body.cinematic-active .cinema-section{height:245svh}
+  body.cinematic-active .cinema-copy{left:6%;width:65vw}
+  body.cinematic-active .cinema-copy h1{font-size:clamp(62px,11vw,104px)}
+  body.cinematic-active .cinema-copy h2{font-size:clamp(56px,9.5vw,90px)}
+}
+@media(max-width:620px){
+  body.cinematic-active .cinema-section{height:220svh}
+  body.cinematic-active .cinema-sticky{min-height:650px}
+  body.cinematic-active .cinema-topline{top:98px;left:20px;right:20px;font-size:7px}
+  body.cinematic-active .cinema-topline span:last-child{display:none}
+  body.cinematic-active .cinema-copy{left:22px;top:23%;width:calc(100% - 44px)}
+  body.cinematic-active .cinema-copy h1{font-size:clamp(64px,17vw,92px);line-height:.82}
+  body.cinematic-active .cinema-copy h2{font-size:clamp(54px,15vw,78px);line-height:.82}
+  body.cinematic-active .cinema-copy p{max-width:330px;font-size:12px}
+  body.cinematic-active .cinema-sidecard{top:auto;bottom:86px;right:18px;width:205px;padding:12px 14px}
+  body.cinematic-active .cinema-scrollhint{left:22px;transform:none;bottom:27px;font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.cinematic-active .cinema-section{height:auto;min-height:100svh}
+  body.cinematic-active .cinema-sticky{position:relative;height:100svh;min-height:100svh}
+  body.cinematic-active .cinema-copy{opacity:1;transform:none!important;filter:none!important}
+  body.cinematic-active .cinema-copy:not(.cinema-copy-one){display:none}
+  body.cinematic-active .cinema-sidecard,body.cinematic-active .cinema-scrollhint{opacity:1;transform:none}
+}
