@@ -154,4 +154,4 @@ assert.ok(js.includes('function notificationsPage()'));
 assert.ok(js.includes("route==='/notifications'"));
 assert.ok(js.includes('window.TurfMateCloud.bootstrap()'));
 
-assert.ok(backend.includes('profileMap(existing,session.user.email)'));
+assert.ok(cloud.includes('profileMap(existing,session.user.email)'));
