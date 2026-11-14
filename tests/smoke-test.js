@@ -121,3 +121,7 @@ assert.ok(css.includes('STEP 6 — Elite football experience'));
 assert.ok(css.includes('.elite-stadium-orb'));
 assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
 assert.ok(html.includes('data-nav="leaderboard"'));
+
+assert.ok(js.includes('function playerAvatarMarkup(player,className)'));
+assert.ok(js.includes('name="avatarUrl"'));
+assert.ok(js.includes("const avatarUrl=String(fd.get('avatarUrl')||'').trim()"));

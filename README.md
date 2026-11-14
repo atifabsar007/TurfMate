@@ -90,3 +90,5 @@ Work on feature branches and merge reviewed pull requests into `main`. Keep the 
 - Added a motion pause control, pointer-responsive 3D card tilt, responsive layouts and reduced-motion support.
 - Player ranking formula: 4 points per goal, 3 per assist, 2 per win and 5 per Man of the Match vote. Team league points: 3 per win and 1 per draw.
 - All rankings and votes are derived from local browser records. This is a front-end prototype, not yet a shared verified competition or cross-device leaderboard.
+
+- Added optional public profile-photo URLs with HTTP/HTTPS validation and avatar fallbacks. The photo field is editable from the player dashboard.
