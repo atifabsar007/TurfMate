@@ -93,3 +93,13 @@ assert.ok(js.includes("status:'completed'"));
 assert.ok(js.includes("playersPerSide"));
 assert.ok(css.includes('STEP 4 — matchmaking and live match centre'));
 assert.ok(html.includes('data-nav="matches"'));
+
+assert.ok(js.includes('function goalEventModal(matchId,side)'));
+assert.ok(js.includes('id="goal-event-form"'));
+assert.ok(js.includes("if(form.id==='goal-event-form')"));
+assert.ok(js.includes('goalEvents:[...(m.goalEvents||[]),goal]'));
+assert.ok(js.includes('playerGoals'));
+assert.ok(js.includes('playerAssists'));
+assert.ok(js.includes('PLAYER PERFORMANCE'));
+assert.ok(css.includes('STEP 5 — player performance and match analytics'));
+assert.ok(css.includes('.match-event-log'));

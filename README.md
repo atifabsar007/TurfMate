@@ -73,3 +73,11 @@ Work on feature branches and merge reviewed pull requests into `main`. Keep the 
 - Formation and line-up editor supports 5v5, 7v7 and 11v11 formation presets and player position assignments.
 - Personal match record summarises appearances, wins, draws and team goals in completed matches.
 - This remains a local-browser prototype. A secure shared backend is required for public cross-device matchmaking, live synchronisation, identity verification and push notifications.
+
+
+## Step 5 — Player Performance & Match Analytics
+
+- Match organisers record goals with scorer, optional assister and match minute; the scoreboard updates with the event.
+- Match cards show a chronological goal-event log and assist information.
+- Player dashboard calculates goals, assists, wins and win rate from recorded match events.
+- Goal events and personal analytics are stored locally in the browser prototype; verified multi-user stats require the future shared backend.
