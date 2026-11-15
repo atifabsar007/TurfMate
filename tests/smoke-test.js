@@ -160,3 +160,15 @@ assert.ok(cloud.includes('resetPasswordForEmail'));
 assert.ok(cloud.includes('updateUser({password})'));
 assert.ok(js.includes("id=\"password-reset-form\""));
 assert.ok(js.includes("data-action=\"forgot-password\""));
+
+
+// Step 7.1 — cloud backend security hardening
+const securityMigration = fs.readFileSync(path.join(root, 'supabase/migrations/202611150001_turfmate_security_hardening.sql'), 'utf8');
+assert.ok(securityMigration.includes('auth.uid()'));
+assert.match(securityMigration, /revoke all on function public\.tm_leave_match\(text\) from public, anon/i);
+assert.match(securityMigration, /revoke update on public\.notifications from authenticated/i);
+assert.match(securityMigration, /drop policy if exists "invitation recipients respond"/i);
+assert.ok(securityMigration.includes('tm_mark_all_notifications_read'));
+assert.ok(cloud.includes("rpc('tm_mark_notification_read'"));
+assert.ok(cloud.includes("rpc('tm_mark_all_notifications_read'"));
+assert.ok(!cloud.includes("from('notifications').update("));
