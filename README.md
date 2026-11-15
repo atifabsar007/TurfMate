@@ -105,7 +105,7 @@ TurfMate now includes an optional Supabase backend adapter, SQL migration, cloud
 ### Connect a Supabase project
 
 1. Create a Supabase project.
-2. Open **SQL Editor** and run `supabase/migrations/202611140001_turfmate_cloud_backend.sql`.
+2. Open **SQL Editor** and run the migrations in order: `supabase/migrations/202611140001_turfmate_cloud_backend.sql`, then `supabase/migrations/202611150001_turfmate_security_hardening.sql`.
 3. Copy `backend-config.example.js` to `backend-config.js` and add the Project URL and anon/publishable key from Supabase Project Settings → API.
 4. Never place a service-role/secret key in browser code.
 5. In Supabase Auth, configure the production site URL and email redirect URLs. For production, enable email confirmation and configure SMTP.

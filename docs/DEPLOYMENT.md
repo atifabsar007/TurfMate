@@ -15,7 +15,7 @@ The current release is a static front-end prototype. Player accounts use browser
 
 The website remains compatible with local demo mode until Supabase credentials are configured.
 
-1. Create a Supabase project and run `supabase/migrations/202611140001_turfmate_cloud_backend.sql` in its SQL Editor.
+1. Create a Supabase project and run these migrations in order in its SQL Editor: `supabase/migrations/202611140001_turfmate_cloud_backend.sql`, then `supabase/migrations/202611150001_turfmate_security_hardening.sql`.
 2. Copy `backend-config.example.js` to `backend-config.js`.
 3. Fill in `supabaseUrl` and the anon/publishable key only. Never add a service-role/secret key.
 4. Configure Auth Site URL, redirect URLs, email confirmation and SMTP.
