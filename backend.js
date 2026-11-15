@@ -184,13 +184,12 @@
   async function invitePlayer(teamId,playerId){const result=await rpc('tm_invite_player',{p_team_id:teamId,p_invitee_id:playerId});await refreshInvites();await refreshNotifications();return result;}
   async function respondInvite(inviteId,accept){const result=await rpc('tm_respond_team_invite',{p_invite_id:inviteId,p_accept:accept});await Promise.all([refreshRecords(),refreshInvites(),refreshNotifications()]);return result;}
   async function markNotificationRead(id){
-    const {error}=await ensure().from('notifications').update({read_at:new Date().toISOString()}).eq('id',id).eq('recipient_id',activeUserId);
-    if(error)throw error;
-    const rows=$read('turfmate:notifications');$store('turfmate:notifications',rows.map(n=>n.id===id?{...n,readAt:new Date().toISOString()}:n));announce('notifications');
+    await rpc('tm_mark_notification_read',{p_notification_id:id});
+    const readAt=new Date().toISOString(),rows=$read('turfmate:notifications');
+    $store('turfmate:notifications',rows.map(n=>n.id===id?{...n,readAt}:n));announce('notifications');
   }
   async function markAllNotificationsRead(){
-    const {error}=await ensure().from('notifications').update({read_at:new Date().toISOString()}).eq('recipient_id',activeUserId).is('read_at',null);
-    if(error)throw error;
+    await rpc('tm_mark_all_notifications_read',{});
     await refreshNotifications();
   }
   window.TurfMateCloud={
